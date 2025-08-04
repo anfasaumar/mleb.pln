@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum Listrik - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hover-effect:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .navbar-search-form .search-input {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+        }
+        .navbar-search-form .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Hero Carousel specific styles */
+        .hero-carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 1; /* Below the overlay and content */
+        }
+
+        .hero-carousel-slide.active {
+            opacity: 1;
+            z-index: 2; /* Active slide is visible */
+        }
+
+        /* Overlay */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: transparent; /* Semi-transparent black */
+            z-index: 3; /* Above slides, below content */
+        }
+
+        /* Hero Content */
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 4; /* Above everything */
+            height: 100%; /* Ensure it spans full height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Carousel scrollbar hide */
+        .carousel-container, .logo-carousel-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .carousel-container::-webkit-scrollbar, .logo-carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Smooth marquee effect for logo carousel */
+        .marquee-wrapper {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            width: 150px;
+            margin-right: 40px;
+        }
+
+/* <!-- CSS untuk flip effect  */
+  .flip-card {
+    perspective: 1000px;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    backface-visibility: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+
+  .flip-card-front {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .flip-card-back {
+    background: linear-gradient(to right, #00afc1, #0d5c66);
+    color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .flip-card {
+      max-width: 100%;
+      height: 300px;
+    }
+  }
+
+  @media (min-width: 641px) {
+    .flip-card {
+      max-width: 320px;
+      height: 400px;
+    }
+  }
+
+   /* CSS Kustom untuk Animasi Scrolling news */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-50%); /* Scroll setengah dari total lebar konten (termasuk duplikat) */
+            }
+        }
+
+        .animate-scroll {
+            animation: scroll-left var(--scroll-speed, 60s) linear infinite;
+        }
+
+        .scroll-track:hover .animate-scroll {
+            animation-play-state: paused; /* Berhenti scroll saat di-hover */
+        }
+
+        /* Styling tambahan untuk gambar */
+        .card-events-img img {
+            width: 100%; /* Memastikan gambar mengisi lebar kartu */
+            height: 150px; /* Tinggi tetap untuk gambar */
+            object-fit: cover; /* Memastikan gambar pas tanpa terdistorsi */
+            border-radius: 0.25rem; /* Sudut sedikit melengkung */
+            margin-bottom: 0.5rem; /* Spasi di bawah gambar */
+        }
+
+        /* Responsivitas untuk kartu */
+        @media (min-width: 640px) {
+            .item {
+                min-width: 250px; /* Lebar kartu sedikit lebih besar di layar menengah */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .item {
+                min-width: 300px; /* Lebar kartu lebih besar di layar desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- top navbar section -->
+<div class="bg-[#035B71] text-white py-2 shadow-md">
+    <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center gap-2">
+            <i class="fas fa-globe text-white"></i>
+            <small class="text-white">museumlistrikpln.com | (+62) 812-3456-7890</small>
+        </div>
+        <div class="flex gap-4">
+            <a href="mailto:museumlistrikpln@gmail.com" class="text-white text-lg hover-effect" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-lg hover-effect" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="tel:+6281234567890" class="text-white text-lg hover-effect" aria-label="Telepon"><i class="fas fa-phone"></i></a>
+            <a href="https://instagram.com/museumlistrik" target="_blank" class="text-white text-lg hover-effect" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@museumlistrikpln" target="_blank" class="text-white text-lg hover-effect" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@MuseumListrikPLN" target="_blank" class="text-white text-lg hover-effect" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<!-- main navbar section -->
+<nav class="sticky top-0 z-50 shadow-lg" style="background: linear-gradient(to right, #00AFC1, #0D5C66);">
+    <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+        <a class="flex items-center gap-2 text-white font-bold text-xl">
+            <img src="MLEB-logo.png" alt="Logo Museum Listrik dan Energi Baru Terbarukan" class="w-24 h-auto">
+        </a>
+        <button class="md:hidden border-0 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggler">
+            <span class="navbar-toggler-icon block w-6 h-6"></span>
+        </button>
+        <div class="hidden md:flex flex-col md:flex-row md:items-center md:flex-1 w-full md:w-auto mt-4 md:mt-0" id="navbarNav">
+            <ul class="flex flex-col md:flex-row md:ml-8 gap-3 md:gap-6 w-full md:w-auto">
+                <li><a href="#beranda" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Beranda</a></li>
+                <li><a href="#news" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">News</a></li>
+                <li><a href="#events" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Event</a></li>
+                <li><a href="/finalcatalog.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Katalog</a></li>
+            </ul>
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6 ml-auto mt-4 md:mt-0 w-full md:w-auto">
+                <form class="flex w-full md:w-auto navbar-search-form" role="search">
+                    <input class="search-input py-2 px-4 rounded-full mr-2 outline-none focus:ring-2 focus:ring-white focus:border-transparent w-full md:w-48" type="search" placeholder="Cari...">
+                    <button class="bg-white text-[#0D5C66] px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition duration-200 flex-shrink-0" type="submit">Cari</button>
+                </form>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 text-white font-medium px-3 py-2 rounded-md hover:bg-white/10 transition duration-200" type="button" aria-expanded="false" aria-haspopup="true">
+                        <i class="fas fa-user-circle text-xl"></i> Profil
+                    </button>
+                    <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 origin-top-right">
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/finalindex.html">Dashboard</a></li>
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/pengaturan.html">Pengaturan</a></li>
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/login.html">Login</a></li>
+                        <li><hr class="border-t border-gray-200 my-1"></li>
+                        <li><a class="block px-4 py-2 text-red-600 hover:bg-gray-100" href="#">Keluar</a></li>
+                    </ul>
+                </div>
+                <a class="" href="#">
+                    <img src="logo-pln-removebg-preview.png" alt="Logo PLN" class="w-20 h-auto">
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!-- hero section -->
+<section id="beranda" class="hero relative w-full h-[600px] overflow-hidden">
+    <div id="hero-carousel-container" class="absolute inset-0">
+        </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content-wrapper max-w-5xl mx-auto px-4 text-white">
+        <div class="text-center p-6 bg-black bg-opacity-30 rounded-lg"> <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight"></h1>
+            <p id="hero-subtitle" class="text-lg sm:text-xl mb-8 max-w-3xl mx-auto opacity-90"></p>
+            <a href="#features" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">Jelajahi Sekarang</a>
+        </div>
+    </div>
+
+    <button id="hero-prev-btn" aria-label="Previous slide" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 text-white p-3 rounded-full hover:bg-white/50 transition duration-300 z-10 text-xl md:text-2xl">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button id="hero-next-btn" aria-label="Next slide" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 text-white p-3 rounded-full hover:bg-white/50 transition duration-300 z-10 text-xl md:text-2xl">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <div id="hero-indicators" class="absolute bottom-6 left-0 right-0 flex justify-center items-center space-x-3 z-10">
+        </div>  
+    <div class="business-travel-checkbox max-w-5xl mx-auto mt-4 px-2 z-20 relative">
+        <input type="checkbox" id="newsletter" class="mr-2">
+        <label for="newsletter" class="text-white text-opacity-80 text-sm">Daftar untuk promo dan event terbaru</label>
+    </div>
+</section
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-extrabold text-indigo-800 mb-6">Tentang Kami</h2>
+            <p class="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+                Museum Listrik dan Energi Baru Terbarukan (MLEB) adalah destinasi wisata edukatif interaktif yang dikelola oleh PT PLN (Persero) di bawah naungan Pusat Pendidikan dan Pelatihan (Pusdiklat) PLN.
+                Sebagai bagian dari komitmen PLN dalam mengedukasi masyarakat tentang ketenagalistrikan dan energi baru terbarukan, MLEB hadir sebagai pusat pembelajaran yang inspiratif dan inovatif bagi semua kalangan.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+            <div class="p-8 bg-white rounded-lg shadow-lg">
+                <h3 class="text-3xl font-bold text-indigo-700 mb-4 flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    Visi Kami
+                </h3>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Menjadi pusat edukasi dan inovasi terdepan di bidang ketenagalistrikan dan energi baru terbarukan yang diakui secara nasional maupun internasional, serta menjadi katalisator dalam mewujudkan masa depan energi yang berkelanjutan.
+                </p>
+            </div>
+            <div class="p-8 bg-white rounded-lg shadow-lg">
+                <h3 class="text-3xl font-bold text-indigo-700 mb-4 flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h2V1a1 1 0 112 0v2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 5a1 1 0 011-1h2a1 1 0 110 2H8a1 1 0 01-1-1z" clip-rule="evenodd"></path><path d="M3 14s.879 1.583 2.903 3.098C7.02 18.067 9.005 19 10 19c.994 0 2.02-.933 4.097-2.902C16.122 15.583 17 14 17 14V12h2v2s-1.879 1.583-3.903 3.098C14.98 18.067 12.995 19 12 19c-.994 0-2.02-.933-4.097-2.902C5.878 15.583 4 14 4 14V12H2v2z"></path></svg>
+                    Misi Kami
+                </h3>
+                <ul class="list-disc list-inside text-lg text-gray-600 space-y-2 leading-relaxed">
+                    <li>Menyediakan pengalaman belajar yang interaktif dan inovatif tentang sejarah kelistrikan, teknologi energi, dan EBT.</li>
+                    <li>Meningkatkan kesadaran masyarakat akan pentingnya energi dan keberlanjutan.</li>
+                    <li>Menjadi pusat riset dan pengembangan inovasi di bidang energi baru terbarukan.</li>
+                    <li>Mendukung program pemerintah dalam transisi energi menuju masa depan yang lebih hijau.</li>
+                </ul>
+            </div>
+        </div>
+</section>
+
+
+<!-- catalog section  -->
+<section id="catalog" class="py-16" style="background: linear-gradient(to right, #00AFC1, #0D5C66);">
+    <div class="container mx-auto px-6 text-center mb-12">
+        <h2 class="text-4xl lg:text-5xl font-extrabold flex justify-center items-center gap-4 text-white">
+            <i class="fas fa-bolt text-yellow-300"></i>
+            <span class="text-gradient bg-gradient-to-r from-white to-gray-200">KATALOG MUSEUM LISTRIK</span>
+        </h2>
+        <p class="mt-4 text-lg lg:text-xl text-white opacity-90">
+            Jelajahi berbagai Penawaran dan Pengalaman Menarik dari Kami di Museum Listrik dan Energi Baru Terbarukan.
+        </p>
+    </div>
+    <div class="relative mt-12 overflow-hidden">
+        <div id="catalog-carousel" class="carousel-container flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-1 px-10 py-4 md:px-8 lg:px-50">
+            </div>
+        <button id="prevCatalogBtn" aria-label="Previous catalog item" class="carousel-prev absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/70 p-3 rounded-full shadow-lg hover:bg-white/90 transition duration-300 z-10 text-xl font-bold">
+            &lt;
+        </button>
+        <button id="nextCatalogBtn" aria-label="Next catalog item" class="carousel-next absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/70 p-3 rounded-full shadow-lg hover:bg-white/90 transition duration-300 z-10 text-xl font-bold">
+            &gt;
+        </button>
+        <div id="catalog-indicators" class="flex justify-center items-center mt-8 space-x-3">
+            </div>
+    </div>
+</section>
+
+<!-- Mleb Partners Section -->
+      <section id="partners" class="py-10 text-white" style="background: white">
+  <div class="container mx-auto px-6 text-center mb-12">
+    <div class="animate__animated animate__fadeInUp">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+
+    <!-- MLEB Partners -->
+    <div>
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-extrabold text-purple-500 flex justify-center items-center gap-2">
+        <i class="fas fa-handshake text-purple-500"></i> MLEB Partners
+      </h2>
+      <p class="text-purple-500 mt-2">Kami berkolaborasi dengan berbagai institusi dan organisasi terpercaya.</p>
+      <hr class="border-t-2 border-black w-100 mx-auto mt-4">
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+
+
+        <!-- Partner Card -->
+        <div class="bg-transparent p-100 w-100 rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="TMII.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="dinas-pendidikan.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="JTA.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="jumpstart-logo.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="igtki.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="paramita-jaya.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="PUTRI.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="HC.png" alt="TMII" 
+       class="h-14 p-25 mx-auto object-contain transition duration-300">
+</div>
+         <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="aice.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+      </div>
+    </div>
+
+    
+    <!-- Our Certifications -->
+   <div>
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-extrabold text-purple-500 flex justify-center items-center gap-2">
+        <i class="fas fa-certificate text-purple-500"></i> Our Certifications
+      </h2>
+      <p class="text-purple-500 mt-2">Pengakuan resmi atas standar dan kualitas layanan kami.</p>
+      <hr class="border-t-2 border-black w-100 mx-auto mt-4">
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+
+        <!-- Certification Card -->
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5 ">
+          <img src="14001-2005.png" alt="ISO 14001:2005" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="9004.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="logo-smk3.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="pmi.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="konsultan-iso-37001.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="Konsultan-ISO-37001-2016-Sistem-Manajemen-Anti-Penyuapan.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="museum-awards.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="ISO-14001-Tahun-2015.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="ISO-9001-2015.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="CHSE.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+         <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="dirjen-k3.png" alt="ISO 14001:2005" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+          <!-- flip card section -->
+<section id="events" class="py-20 bg-gray-100">
+  <div class="container mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-indigo-700 mb-4">Event Terbaru</h2>
+      <p class="text-gray-600">Jelajahi berbagai event menarik yang kami selenggarakan</p>
+      <hr class="border-t-2 border-indigo-300 w-100 mx-auto mt-4">
+    </div>
+
+    <!-- Flip Card Container Horizontal -->
+    <div class="flex flex-wrap justify-center gap-8">
+      
+      <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+       <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+        <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+        <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+        <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+        <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+        <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+        <!-- Flip Card -->
+      <div class="flip-card w-72 h-[420px]">
+        <div class="flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out transform hover:rotate-y-180">
+          
+          <!-- Front -->
+          <div class="flip-card-front absolute w-full h-full backface-hidden bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+            <img src="event1.jpg" alt="Event" class="w-full h-auto rounded-lg mb-4">
+            <h3 class="text-lg font-bold mb-2">Pameran Energi</h3>
+            <p class="text-sm text-gray-600">Temukan teknologi terbaru dan interaktif seputar kelistrikan</p>
+          </div>
+          
+          <!-- Back -->
+          <div class="flip-card-back absolute w-full h-full backface-hidden bg-indigo-600 text-white p-6 rounded-xl flex flex-col justify-center items-center text-center rotate-y-180">
+            <h3 class="text-lg font-bold mb-2">Ayo Daftar Sekarang</h3>
+            <p class="text-sm">Event edukatif dan menarik untuk semua kalangan — jangan lewatkan!</p>
+            <a href="#register" class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">Daftar</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- berita section -->
+   
+    <section id="news" class="py-20 bg-gray-100">
+        <div class="overflow-hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-purple-700 mt-5 flex justify-center items-center gap-3">
+                    <i class="fas fa-bolt text-purple-500"></i> Terkini Dari Museum Listrik
+                </h2>
+                <p class="text-gray-600 mt-2">Berita, Acara, dan Inovasi Terbaru Seputar Dunia Kelistrikan</p>
+                <hr class="border-t-2 border-purple-400 w-100 mx-auto mt-4">
+            </div>
+
+            <div class="relative w-full flex overflow-hidden py-4">
+                <div id="scrollContainer" class="scroll-track flex flex-nowrap gap-5 animate-scroll" style="--scroll-speed: 30s;">
+                    <div class="card-events-img item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Pameran Baru" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Pembukaan Pameran "Energi Masa Depan"</h3>
+                        <p class="text-gray-600 text-sm">Museum Listrik dengan bangga mempersembahkan pameran terbaru kami yang menggali inovasi energi terbarukan...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Workshop Anak" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Workshop Listrik untuk Anak</h3>
+                        <p class="text-gray-600 text-sm">Ayo ajak si kecil belajar dasar-dasar listrik dengan cara yang menyenangkan dan interaktif...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Koleksi Lama" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Restorasi Koleksi Generator Kuno</h3>
+                        <p class="text-gray-600 text-sm">Kami berhasil merestorasi generator listrik berusia puluhan tahun ke kondisi operasionalnya...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Kunjungan Sekolah" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Kunjungan Edukasi dari SMKN 1 Jakarta</h3>
+                        <p class="text-gray-600 text-sm">Rombongan siswa dari SMKN 1 Jakarta melakukan kunjungan studi banding ke Museum Listrik...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Event Komunitas" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Kolaborasi dengan Komunitas Pecinta Sains</h3>
+                        <p class="text-gray-600 text-sm">Museum kami menjadi tuan rumah pertemuan rutin Komunitas Pecinta Sains untuk diskusi menarik...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Riset Baru" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Penelitian Terbaru tentang Bio-listrik</h3>
+                        <p class="text-gray-600 text-sm">Tim peneliti museum sedang melakukan eksplorasi mendalam mengenai potensi bio-listrik dari alam...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Donasi" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Apresiasi Donasi Perkakas Kuno</h3>
+                        <p class="text-gray-600 text-sm">Kami mengucapkan terima kasih kepada Bapak/Ibu atas donasi perkakas listrik bersejarah yang berharga...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Program Pendidikan" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Peluncuran Program Pendidikan Interaktif</h3>
+                        <p class="text-gray-600 text-sm">Program baru ini dirancang untuk segala usia, mengajak pengunjung memahami listrik secara visual...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+
+                    <div class="card-events-img item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Pameran Baru" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Pembukaan Pameran "Energi Masa Depan"</h3>
+                        <p class="text-gray-600 text-sm">Museum Listrik dengan bangga mempersembahkan pameran terbaru kami yang menggali inovasi energi terbarukan...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Workshop Anak" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Workshop Listrik untuk Anak</h3>
+                        <p class="text-gray-600 text-sm">Ayo ajak si kecil belajar dasar-dasar listrik dengan cara yang menyenangkan dan interaktif...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Koleksi Lama" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Restorasi Koleksi Generator Kuno</h3>
+                        <p class="text-gray-600 text-sm">Kami berhasil merestorasi generator listrik berusia puluhan tahun ke kondisi operasionalnya...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Kunjungan Sekolah" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Kunjungan Edukasi dari SMKN 1 Jakarta</h3>
+                        <p class="text-gray-600 text-sm">Rombongan siswa dari SMKN 1 Jakarta melakukan kunjungan studi banding ke Museum Listrik...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Event Komunitas" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Kolaborasi dengan Komunitas Pecinta Sains</h3>
+                        <p class="text-gray-600 text-sm">Museum kami menjadi tuan rumah pertemuan rutin Komunitas Pecinta Sains untuk diskusi menarik...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Riset Baru" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Penelitian Terbaru tentang Bio-listrik</h3>
+                        <p class="text-gray-600 text-sm">Tim peneliti museum sedang melakukan eksplorasi mendalam mengenai potensi bio-listrik dari alam...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Donasi" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Apresiasi Donasi Perkakas Kuno</h3>
+                        <p class="text-gray-600 text-sm">Kami mengucapkan terima kasih kepada Bapak/Ibu atas donasi perkakas listrik bersejarah yang berharga...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="item bg-white p-4 rounded-lg shadow-lg min-w-[200px] flex-shrink-0">
+                        <img src="TMII.png" alt="Program Pendidikan" class="">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Peluncuran Program Pendidikan Interaktif</h3>
+                        <p class="text-gray-600 text-sm">Program baru ini dirancang untuk segala usia, mengajak pengunjung memahami listrik secara visual...</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 text-sm mt-2 block">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gradient-to-r from-[#00AFC1] to-[#0D5C66] text-white py-12" style="background: linear-gradient(to right, #00AFC1, #0D5C66);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 text-center md:text-left">
+
+    <!-- Logo & Deskripsi -->
+    <div>
+      <img src="MLEB-logo.png" alt="Logo Nama Perusahaan">
+      <h2 class="text-xl font-bold mb-3">Museum Listrik dan Energi Baru</h2>
+      <p class="text-sm text-gray-200">
+        Solusi teknologi masa depan. Kami menyediakan layanan digital terintegrasi untuk membangun masa depan yang cerdas.
+      </p>
+    </div>
+
+    <!-- Kontak -->
+<div>
+  <h3 class="text-lg font-semibold mb-3">📞 Kontak</h3>
+  <p class="text-sm text-gray-300">Jl. Teknologi No.88, Jakarta</p>
+  <p class="text-sm text-gray-300">info@namaperusahaan.id</p>
+  
+  <!-- Contact Us via WhatsApp -->
+  <div class="mt-4 flex items-center space-x-2 text-sm text-white pt-4 border-t border-white/20">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" class="w-5 h-5">
+    <a href="https://wa.me/6281234567890" target="_blank" class="text-white hover:underline hover:text-white-50 transition">
+    M-Assist
+    </a>
+  </div>
+</div>
+
+
+    <!-- Lokasi & Google Maps -->
+    <div>
+      <h3 class="text-lg font-semibold mb-3">🗺️ Lokasi Kantor</h3>
+      <div class="rounded-lg shadow-lg overflow-hidden">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126916.98354236377!2d106.689431!3d-6.229728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f03a2dc4c179%3A0xfed6e56d99e4c109!2sJakarta!5e0!3m2!1sid!2sid!4v1600000000000!5m2!1sid!2sid"
+          width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Media Sosial -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">📱 Ikuti Kami</h3>
+      <div class="flex flex-col items-center md:items-start space-y-3 text-white text-base">
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-blue-500 transition">
+          <i class="fab fa-facebook-square text-xl"></i>
+          <span>Facebook</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-pink-500 transition">
+          <i class="fab fa-instagram text-xl"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-sky-400 transition">
+          <i class="fab fa-twitter text-xl"></i>
+          <span>Twitter</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-red-600 transition">
+          <i class="fab fa-youtube text-xl"></i>
+          <span>YouTube</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-black transition">
+      <i class="fab fa-tiktok text-xl"></i>
+      <span>TikTok</span>
+    </a>
+     <a href="mailto:info@namaperusahaan.id" class="text-white flex items-center space-x-2 hover:text-yellow-400 transition">
+      <i class="fas fa-envelope text-xl"></i>
+      <span>Email</span>
+    </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="mt-10 border-t border-white/30 pt-4 text-center text-sm text-gray-300">
+    &copy; 2025 Nama Perusahaan. Semua Hak Dilindungi.
+  </div>
+</footer>
+
+    
+          <!-- Add Font Awesome for icons in the head section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+
+
+<script>
+    // Data for Hero Carousel
+    const heroSlidesData = [
+        {
+            image: "mleb depan.png",
+            title: "Jelajahi Dunia Listrik & Energi Baru",
+            subtitle: "Temukan pengetahuan dan inovasi terbaru di Museum Listrik dan Energi Baru Terbarukan. Pengalaman interaktif menanti Anda!"
+        },
+        {
+            image: "mlebtulisan.jpg", // 'mlebtulisan.jpg' (Using existing image as placeholder)
+            title: "Inovasi Tanpa Batas di Wisma Listrik",
+            subtitle: "Saksikan bagaimana teknologi listrik mengubah dunia, dari masa lalu hingga masa depan yang cerah."
+        },
+        {
+            image: "teater-5d.jpg", // 'teater-5d.jpg' (Using existing image as placeholder)
+            title: "Pengalaman Imersif di Teater 5D Kami",
+            subtitle: "Rasakan petualangan energi yang mendebarkan dengan visual, suara, dan sensasi yang memukau."
+        }
+    ];
+
+    // Data for Catalog Carousel
+    const catalogData = [
+        {
+            image: "mleb depan.png",
+            title: "Pameran Sejarah Kelistrikan",
+            description: "Mengungkap perjalanan listrik dari masa ke masa.",
+            price: "Mulai Rp 50.000",
+            rating: 4.8,
+            details: "Interaktif & Edukatif"
+        },
+         {
+            image: "mleb depan.png",
+            title: "Pameran Sejarah Kelistrikan",
+            description: "Mengungkap perjalanan listrik dari masa ke masa.",
+            price: "Mulai Rp 50.000",
+            rating: 4.8,
+            details: "Interaktif & Edukatif"
+        },
+        {
+            image: "mlebtulisan.jpg",
+            title: "Eksperimen Energi Terbarukan",
+            description: "Pelajari cara kerja energi terbarukan dengan alat interaktif.",
+            price: "Mulai Rp 45.000",
+            rating: 4.7,
+            details: "Praktis & Menarik"
+        },
+        {
+            image: "teater-5d.jpg",
+            title: "Teater 5D Energi",
+            description: "Nikmati film pendek tentang energi dengan efek 5D.",
+            price: "Mulai Rp 60.000",
+            rating: 4.9,
+            details: "Pengalaman Sinematik"
+        },
+        {
+            image: "mleb depan.png",
+            title: "Kelas Interaktif Listrik",
+            description: "Kelas interaktif untuk anak-anak dan dewasa.",
+            price: "Mulai Rp 40.000",
+            rating: 4.6,
+            details: "Belajar Sambil Bermain"
+        },
+        {
+            image: "mlebtulisan.jpg",
+            title: "Workshop Energi Terbarukan",
+            description: "Pelajari cara membuat panel surya mini.",
+            price: "Mulai Rp 70.000",
+            rating: 4.8,
+            details: "Hands-on Learning"
+        },
+        {
+            image: "teater-5d.jpg",
+            title: "Wisma Energi Terbarukan",
+            description: "Eksplorasi inovasi energi masa depan.",
+            price: "Mulai Rp 65.000",
+            rating: 4.9,
+            details: "Simulasi Canggih"
+        },
+        {
+            image: "mleb depan.png",
+            title: "Laboratorium Listrik Interaktif",
+            description: "Rasakan langsung cara kerja listrik.",
+            price: "Mulai Rp 55.000",
+            rating: 4.7,
+            details: "Hands-on Experience"
+        },
+        {
+            image: "mlebtulisan.jpg",
+            title: "Workshop Sains Energi",
+            description: "Program edukasi mendalam untuk semua usia.",
+            price: "Mulai Rp 75.000",
+            rating: 4.6,
+            details: "Untuk Pelajar & Umum"
+        },
+        {
+            image: "teater-5d.jpg",
+            title: "Tur Virtual Museum",
+            description: "Jelajahi museum dari mana saja.",
+            price: "Gratis / Donasi",
+            rating: 4.5,
+            details: "Akses Online"
+        }
+    ];
+
+    // Data for Mitra Kami Carousel
+    const mitraLogos = [
+        'https://via.placeholder.com/150x80/FF5733/FFFFFF?text=Mitra+A', /* Replace with actual logo URLs */
+        'https://via.placeholder.com/150x80/33FF57/FFFFFF?text=Mitra+B',
+        'https://via.placeholder.com/150x80/3357FF/FFFFFF?text=Mitra+C',
+        'https://via.placeholder.com/150x80/FF33CC/FFFFFF?text=Mitra+D',
+        'https://via.placeholder.com/150x80/33CCFF/FFFFFF?text=Mitra+E',
+        'https://via.placeholder.com/150x80/FF8833/FFFFFF?text=Mitra+F',
+        'https://via.placeholder.com/150x80/8833FF/FFFFFF?text=Mitra+G'
+    ];
+
+    // --- Hero Carousel Logic ---
+    const heroCarouselContainer = document.getElementById('hero-carousel-container');
+    const heroTitleElement = document.getElementById('hero-title');
+    const heroSubtitleElement = document.getElementById('hero-subtitle');
+    const heroPrevBtn = document.getElementById('hero-prev-btn');
+    const heroNextBtn = document.getElementById('hero-next-btn');
+    const heroIndicatorsContainer = document.getElementById('hero-indicators');
+
+    let currentHeroSlide = 0;
+    let heroAutoplayInterval;
+
+    function renderHeroSlides() {
+        heroCarouselContainer.innerHTML = ''; // Clear existing slides
+        heroIndicatorsContainer.innerHTML = ''; // Clear existing indicators
+
+        heroSlidesData.forEach((slideData, index) => {
+            // Create slide div
+            const slideDiv = document.createElement('div');
+            slideDiv.className = `hero-carousel-slide ${index === 0 ? 'active' : ''}`;
+            slideDiv.style.backgroundImage = `url('${slideData.image}')`;
+            heroCarouselContainer.appendChild(slideDiv);
+
+            // Create indicator dot
+            const dot = document.createElement('button');
+            dot.className = `w-3 h-3 rounded-full mx-1 transition-all duration-300 ${index === 0 ? 'bg-white' : 'bg-white/50'}`;
+            dot.setAttribute('aria-label', `Go to hero slide ${index + 1}`);
+            dot.onclick = () => showHeroSlide(index);
+            heroIndicatorsContainer.appendChild(dot);
+        });
+
+        // Set initial text
+        heroTitleElement.textContent = heroSlidesData[0].title;
+        heroSubtitleElement.textContent = heroSlidesData[0].subtitle;
+    }
+
+    function showHeroSlide(index) {
+        // Hide all slides and remove active class
+        const slides = heroCarouselContainer.querySelectorAll('.hero-carousel-slide');
+        slides.forEach(slide => slide.classList.remove('active'));
+
+        // Show the target slide and add active class
+        slides[index].classList.add('active');
+
+        // Update text content
+        heroTitleElement.textContent = heroSlidesData[index].title;
+        heroSubtitleElement.textContent = heroSlidesData[index].subtitle;
+
+        // Update indicators
+        const indicators = heroIndicatorsContainer.querySelectorAll('button');
+        indicators.forEach((dot, i) => {
+            dot.classList.remove('bg-white');
+            dot.classList.add('bg-white/50');
+            if (i === index) {
+                dot.classList.add('bg-white');
+                dot.classList.remove('bg-white/50');
+            }
+        });
+
+        currentHeroSlide = index;
+    }
+
+    function nextHeroSlide() {
+        const nextIndex = (currentHeroSlide + 1) % heroSlidesData.length;
+        showHeroSlide(nextIndex);
+    }
+
+    function prevHeroSlide() {
+        const prevIndex = (currentHeroSlide - 1 + heroSlidesData.length) % heroSlidesData.length;
+        showHeroSlide(prevIndex);
+    }
+
+    function startHeroAutoplay() {
+        stopHeroAutoplay(); // Clear existing interval to prevent duplicates
+        heroAutoplayInterval = setInterval(nextHeroSlide, 7000); // Change slide every 7 seconds
+    }
+
+    function stopHeroAutoplay() {
+        clearInterval(heroAutoplayInterval);
+    }
+
+    // Event listeners for Hero Carousel
+    heroPrevBtn.addEventListener('click', () => { prevHeroSlide(); startHeroAutoplay(); });
+    heroNextBtn.addEventListener('click', () => { nextHeroSlide(); startHeroAutoplay(); });
+    // Pause autoplay on hover over the hero section
+    document.querySelector('.hero').addEventListener('mouseenter', stopHeroAutoplay);
+    document.querySelector('.hero').addEventListener('mouseleave', startHeroAutoplay);
+
+
+    // --- Catalog Carousel Logic ---
+    const catalogCarousel = document.getElementById('catalog-carousel');
+    const prevCatalogBtn = document.getElementById('prevCatalogBtn');
+    const nextCatalogBtn = document.getElementById('nextCatalogBtn');
+    const catalogIndicatorsContainer = document.getElementById('catalog-indicators');
+
+    let currentCatalogIndex = 0;
+
+    function renderCatalogSlides() {
+        catalogCarousel.innerHTML = '';
+        catalogData.forEach((item, index) => {
+            const slide = document.createElement('div');
+            slide.className = `carousel-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-3 py-2`;
+            slide.innerHTML = `
+                <div class="relative bg-white rounded-xl shadow-xl overflow-hidden group cursor-pointer transform transition-transform duration-300 hover:scale-[1.02]">
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 text-white p-6">
+                        <h3 class="font-extrabold text-2xl mb-2">${item.title}</h3>
+                        <p class="text-sm opacity-90 mb-3">${item.description}</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-lg font-bold text-yellow-300">${item.price}</span>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star text-sm mr-1"></i>
+                                <span class="text-sm font-semibold">${item.rating.toFixed(1)}</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-300 mb-4">${item.details}</p>
+                        <div class="text-right">
+                            <button class="px-7 py-3 bg-blue-600 text-white rounded-full font-semibold text-base shadow-md hover:bg-blue-700 transition duration-300">
+                                Pesan Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            catalogCarousel.appendChild(slide);
+        });
+        updateCatalogIndicators();
+    }
+
+    function updateCatalogIndicators() {
+        catalogIndicatorsContainer.innerHTML = '';
+        const totalSlides = catalogData.length;
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = `w-3 h-3 rounded-full mx-1 transition-all duration-300 ${i === currentCatalogIndex ? 'bg-white' : 'bg-gray-400'}`;
+            dot.setAttribute('aria-label', `Go to catalog slide ${i + 1}`);
+            dot.onclick = () => {
+                currentCatalogIndex = i;
+                scrollToCurrentCatalogIndex();
+            };
+            catalogIndicatorsContainer.appendChild(dot);
+        }
+    }
+
+    function scrollToCurrentCatalogIndex() {
+        if (!catalogCarousel.querySelector('.carousel-slide')) return; // Avoid error if no slides
+        const slideWidth = catalogCarousel.querySelector('.carousel-slide').offsetWidth;
+        catalogCarousel.scrollLeft = currentCatalogIndex * slideWidth;
+        updateCatalogIndicators();
+    }
+
+    function scrollCatalog(direction) {
+        let newIndex = currentCatalogIndex + direction;
+        if (newIndex < 0) {
+            newIndex = catalogData.length - 1;
+        } else if (newIndex >= catalogData.length) {
+            newIndex = 0;
+        }
+        currentCatalogIndex = newIndex;
+        scrollToCurrentCatalogIndex();
+    }
+
+    let autoPlayCatalogInterval;
+    const startCatalogAutoplay = () => {
+        stopCatalogAutoplay();
+        autoPlayCatalogInterval = setInterval(() => {
+            scrollCatalog(1);
+        }, 5000);
+    };
+
+    const stopCatalogAutoplay = () => {
+        clearInterval(autoPlayCatalogInterval);
+    };
+
+    // --- Mitra Kami Carousel Logic (Marquee Effect) ---
+    const logoTrack1 = document.getElementById('logo-track-1');
+    const logoTrack2 = document.getElementById('logo-track-2');
+
+    const mitraLogo = [
+        'https://via.placeholder.com/150x80/FF5733/FFFFFF?text=Mitra+A',
+        'https://via.placeholder.com/150x80/33FF57/FFFFFF?text=Mitra+B',
+        'https://via.placeholder.com/150x80/3357FF/FFFFFF?text=Mitra+C',
+        'https://via.placeholder.com/150x80/FF33CC/FFFFFF?text=Mitra+D',
+        'https://via.placeholder.com/150x80/33CCFF/FFFFFF?text=Mitra+E',
+        'https://via.placeholder.com/150x80/FF8833/FFFFFF?text=Mitra+F',
+        'https://via.placeholder.com/150x80/8833FF/FFFFFF?text=Mitra+G'
+    ];
+
+    function renderMitraLogos() {
+        logoTrack1.innerHTML = '';
+        logoTrack2.innerHTML = '';
+
+        mitraLogos.forEach(logo => {
+            const logoDiv1 = document.createElement('div');
+            logoDiv1.className = 'marquee-item';
+            logoDiv1.innerHTML = `<img src="${logo}" alt="Partner Logo" class="h-20 object-contain mx-auto">`;
+            logoTrack1.appendChild(logoDiv1);
+
+            const logoDiv2 = document.createElement('div');
+            logoDiv2.className = 'marquee-item';
+            logoDiv2.innerHTML = `<img src="${logo}" alt="Partner Logo" class="h-20 object-contain mx-auto">`;
+            logoTrack2.appendChild(logoDiv2);
+        });
+    }
+
+
+    // --- General Event Listeners and Initializations ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize Navbar Toggler
+        document.getElementById('navbar-toggler').addEventListener('click', function() {
+            const navbarNav = document.getElementById('navbarNav');
+            navbarNav.classList.toggle('hidden');
+            navbarNav.classList.toggle('flex');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Close dropdown on click outside
+        document.addEventListener('click', function(event) {
+            const dropdownButton = document.querySelector('.group > button');
+            const dropdownMenu = document.querySelector('.group > ul');
+            if (dropdownButton && dropdownMenu && !dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('opacity-0', 'invisible', 'scale-95');
+                dropdownMenu.classList.remove('opacity-100', 'visible', 'scale-100');
+            }
+        });
+
+        // Initialize Hero Carousel
+        renderHeroSlides();
+        showHeroSlide(0); // Show the first slide initially
+        startHeroAutoplay();
+
+        // Initialize Catalog Carousel
+        renderCatalogSlides();
+        scrollToCurrentCatalogIndex();
+        startCatalogAutoplay();
+
+        catalogCarousel.addEventListener('mouseenter', stopCatalogAutoplay);
+        catalogCarousel.addEventListener('mouseleave', startCatalogAutoplay);
+        prevCatalogBtn.addEventListener('mouseenter', stopCatalogAutoplay);
+        prevCatalogBtn.addEventListener('mouseleave', startCatalogAutoplay);
+        nextCatalogBtn.addEventListener('mouseenter', stopCatalogAutoplay);
+        nextCatalogBtn.addEventListener('mouseleave', startCatalogAutoplay);
+        catalogIndicatorsContainer.addEventListener('mouseenter', stopCatalogAutoplay);
+        catalogIndicatorsContainer.addEventListener('mouseleave', startCatalogAutoplay);
+
+        prevCatalogBtn.addEventListener('click', () => scrollCatalog(-1));
+        nextCatalogBtn.addEventListener('click', () => scrollCatalog(1));
+
+
+        // Initialize Mitra Kami Carousel
+        renderMitraLogos();
+
+
+        // Simplified Input/Clear logic for Hero Section
+        const locationInput = document.getElementById('locationInput');
+        if (locationInput) { // Check if element exists
+            const clearIcon = locationInput.nextElementSibling;
+            locationInput.addEventListener('input', () => {
+                clearIcon.style.display = locationInput.value.trim() !== '' ? 'block' : 'none';
+            });
+            clearIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                locationInput.value = '';
+                clearIcon.style.display = 'none';
+                locationInput.focus();
+            });
+        }
+
+        document.querySelectorAll('.search-input-group').forEach(group => {
+            group.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('clear-icon') && group.querySelector('input')) {
+                    group.querySelector('input').focus();
+                }
+            });
+        });
+    });
+
+    // Optional: Re-render/adjust on window resize for Catalog Carousel
+    window.addEventListener('resize', () => {
+        if (catalogCarousel.querySelector('.carousel-slide')) {
+            scrollToCurrentCatalogIndex();
+        }
+    });
+
+    // js news 
+        // Opsional: JavaScript untuk mengatur kecepatan scroll secara dinamis atau kontrol lainnya
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollContainer = document.getElementById('scrollContainer');
+            if (scrollContainer) {
+                // Contoh: Mengatur kecepatan scroll dari atribut data (jika ada)
+                const scrollSpeed = scrollContainer.parentElement.style.getPropertyValue('--scroll-speed');
+                console.log(`Kecepatan scroll: ${scrollSpeed || 'default'}`);
+
+                // Anda bisa menambahkan logika JavaScript di sini, misalnya:
+                // - Menghentikan scroll saat tombol tertentu ditekan
+                // - Mengubah arah scroll
+                // - Fetch konten dinamis (lebih kompleks)
+            }
+        });
+</script>
+
+</body>
+</html>

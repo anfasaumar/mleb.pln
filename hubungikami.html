@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontak Kami</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.8s ease forwards; }
+    .glass {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#00afc1] to-[#0d5c66] text-gray-800 min-h-screen flex items-center justify-center p-6">
+
+  <div class="max-w-6xl w-full grid md:grid-cols-2 gap-8 glass p-8 rounded-xl shadow-2xl fade-in">
+
+    <!-- Informasi Kontak & Peta -->
+    <div class="space-y-6 text-white">
+      <h2 class="text-3xl font-extrabold"><i class="fas fa-info-circle mr-2"></i>Info Kontak</h2>
+      <p class="text-sm opacity-90">Kami siap membantu Anda kapan saja. Hubungi kami melalui form atau kontak langsung.</p>
+      <ul class="text-sm space-y-2">
+        <li><i class="fas fa-map-marker-alt mr-2 text-yellow-300"></i>Jl. Web Kreatif No.99, Jakarta</li>
+        <li><i class="fas fa-phone mr-2 text-yellow-300"></i>(021) 7654321</li>
+        <li><i class="fas fa-envelope mr-2 text-yellow-300"></i>support@desainkreatif.id</li>
+      </ul>
+      <div class="rounded-xl overflow-hidden border-2 border-white/50">
+        <iframe src="https://maps.google.com/maps?q=jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+          class="w-full h-48 rounded-lg"></iframe>
+      </div>
+    </div>
+
+    <!-- Formulir -->
+    <div>
+      <h2 class="text-2xl font-bold text-white text-center mb-6"><i class="fas fa-envelope mr-2"></i>Kirim Pesan</h2>
+      <form class="space-y-5" onsubmit="return handleSubmit(event)">
+        <div>
+          <label class="block text-white text-sm mb-1">Nama</label>
+          <input type="text" required
+            class="w-full px-4 py-2 rounded-md bg-white/80 text-gray-900 border border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
+        </div>
+        <div>
+          <label class="block text-white text-sm mb-1">Email</label>
+          <input type="email" required
+            class="w-full px-4 py-2 rounded-md bg-white/80 text-gray-900 border border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
+        </div>
+        <div>
+          <label class="block text-white text-sm mb-1">Pesan</label>
+          <textarea rows="4" required
+            class="w-full px-4 py-2 rounded-md bg-white/80 text-gray-900 border border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 rounded-md transition duration-300 transform hover:scale-105">
+          <i class="fas fa-paper-plane mr-2"></i>Kirim
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notifikasi -->
+  <div id="toast" class="fixed top-6 justify-content-center bg-green-600 text-white py-2 px-4 rounded-lg shadow-xl hidden">
+    ✅ Pesan berhasil dikirim!
+  </div>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const toast = document.getElementById('toast');
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+      e.target.reset();
+      return false;
+    }
+  </script>
+</body>
+</html>

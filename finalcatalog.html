@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Katalog Ruangan Museum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="path/to/your/fontawesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05); /* Lighter track for the sidebar */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3); /* Slightly transparent white */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Adjust backdrop-blur to be more subtle if needed */
+        .backdrop-blur-lg {
+            backdrop-filter: blur(10px); /* Adjust blur strength */
+        }
+         .navbar-search-form .search-input {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+        }
+        .navbar-search-form .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body class="text-white" style="background:#00AFC1 ">
+
+    <!-- top navbar section -->
+<div class="text-white py-2 shadow-md" style="background-color: #0D5C66;">
+    <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center gap-2">
+            <i class="fas fa-globe text-white"></i>
+            <small class="text-white">museumlistrikpln.com | (+62) 812-3456-7890</small>
+        </div>
+        <div class="flex gap-4">
+            <a href="mailto:museumlistrikpln@gmail.com" class="text-white text-lg hover-effect" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-lg hover-effect" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="tel:+6281234567890" class="text-white text-lg hover-effect" aria-label="Telepon"><i class="fas fa-phone"></i></a>
+            <a href="https://instagram.com/museumlistrik" target="_blank" class="text-white text-lg hover-effect" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@museumlistrikpln" target="_blank" class="text-white text-lg hover-effect" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@MuseumListrikPLN" target="_blank" class="text-white text-lg hover-effect" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<!-- main navbar section -->
+<nav class="sticky top-0 z-50 shadow-lg" style="background: linear-gradient(to right, #00AFC1, #0D5C66);">
+    <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+        <a class="flex items-center gap-2 text-white font-bold text-xl">
+            <img src="MLEB-logo.png" alt="Logo Museum Listrik dan Energi Baru Terbarukan" class="w-24 h-auto">
+        </a>
+        <button class="md:hidden border-0 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggler">
+            <span class="navbar-toggler-icon block w-6 h-6"></span>
+        </button>
+        <div class="hidden md:flex flex-col md:flex-row md:items-center md:flex-1 w-full md:w-auto mt-4 md:mt-0" id="navbarNav">
+            <ul class="flex flex-col md:flex-row md:ml-8 gap-3 md:gap-6 w-full md:w-auto">
+                <li><a href="finalindex.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Beranda</a></li>
+                <li><a href="#news" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">News</a></li>
+                <li><a href="#events" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Event</a></li>
+                <li><a href="/finalcatalog.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Katalog</a></li>
+            </ul>
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6 ml-auto mt-4 md:mt-0 w-full md:w-auto">
+                <form class="flex w-full md:w-auto navbar-search-form" role="search">
+                    <input class="search-input py-2 px-4 rounded-full mr-2 outline-none focus:ring-2 focus:ring-white focus:border-transparent w-full md:w-48" type="search" placeholder="Cari...">
+                    <button class="bg-white text-black px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition duration-200 flex-shrink-0" type="submit">Cari</button>
+                </form>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 text-white font-medium px-3 py-2 rounded-md hover:bg-white/10 transition duration-200" type="button" aria-expanded="false" aria-haspopup="true">
+                        <i class="fas fa-user-circle text-xl"></i> Profil
+                    </button>
+                    <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 origin-top-right">
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/index.html">Dashboard</a></li>
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/pengaturan.html">Pengaturan</a></li>
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/login.html">Login</a></li>
+                        <li><hr class="border-t border-gray-200 my-1"></li>
+                        <li><a class="block px-4 py-2 text-red-600 hover:bg-gray-100" href="#">Keluar</a></li>
+                    </ul>
+                </div>
+                <a class="" href="#">
+                    <img src="logo-pln-removebg-preview.png" alt="Logo PLN" class="w-20 h-auto">
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!-- sidebar section -->
+<div class="flex flex-col lg:flex-row min-h-screen" style="background-color: #00AFC1;">
+    <aside class="bg-white/10 backdrop-blur-lg shadow-lg p-6 lg:w-64 lg:h-screen lg:sticky lg:top-0 overflow-y-auto">
+        <div class="flex flex-col h-full p-4 text-white">
+            <h2 class="text-xl font-bold mb-4">What We Have?</h2>
+            <hr class="border-t border-white/30 mb-4">
+
+           <div class="mb-6 relative">
+    <input type="text" id="searchInput" onkeyup="filterRoomsAndSearch()" placeholder="Cari..."
+           class="w-full px-4 py-2 rounded-full bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 pl-10">
+    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+    </div>
+</div>
+
+            <button onclick="filterRooms('all')"
+                    class="w-full px-4 py-2 mb-3 rounded-full bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-semibold hover:from-teal-600 hover:to-cyan-700 transition shadow-md">
+                Semua Penawaran
+            </button>
+
+            <details class="mb-3">
+                <summary class="w-full px-4 py-2 rounded-full bg-white text-gray-800 hover:bg-gray-100 font-semibold cursor-pointer transition">
+                    Hotel
+                </summary>
+                <div class="mt-2 ml-4 space-y-2">
+                    <button onclick="filterRooms('hotel')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-300 text-gray-700 text-sm">
+                        Rumah Energi Baru
+                    </button>
+                    <button onclick="filterRooms('hotel')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-300 text-gray-700 text-sm">
+                        Penginapan Energi
+                    </button>
+                    <button onclick="filterRooms('hotel')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-300 text-gray-700 text-sm">
+                        Penginapan Listrik
+                    </button>
+                </div>
+            </details>
+
+            <details class="mb-3">
+                <summary class="w-full px-4 py-2 rounded-full bg-white text-gray-800 hover:bg-gray-100 font-semibold cursor-pointer transition">
+                    Meeting Room
+                </summary>
+                <div class="mt-2 ml-4 space-y-2">
+                    <button onclick="filterRooms('meeting-room')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Ruang kWh
+                    </button>
+                    <button onclick="filterRooms('meeting-room')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Ruang Tesla
+                    </button>
+                    <button onclick="filterRooms('meeting-room')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Ruang Ohm
+                    </button>
+                    <button onclick="filterRooms('meeting-room')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Ruang Inspiring
+                    </button>
+                    <button onclick="filterRooms('meeting-room')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Ruang Explore
+                    </button>
+                    <button onclick="filterRooms('meeting-room')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Ruang Ampere
+                    </button>
+                    <button onclick="filterRooms('meeting-room')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Ruang Volt
+                    </button>
+                </div>
+            </details>
+
+            <details class="mb-3">
+                <summary class="w-full px-4 py-2 rounded-full bg-white text-gray-800 hover:bg-gray-100 font-semibold cursor-pointer transition">
+                    Other Facilities
+                </summary>
+                <div class="mt-2 ml-4 space-y-2">
+                    <button onclick="filterRooms('other-facilities')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Taman Belakang
+                    </button>
+                    <button onclick="filterRooms('other-facilities')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Taman Tengah
+                    </button>
+                    <button onclick="filterRooms('other-facilities')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Lapangan Olahraga
+                    </button>
+                    <button onclick="filterRooms('other-facilities')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Fasilitas Olahraga
+                    </button>
+                    <button onclick="filterRooms('other-facilities')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Cafe Faraday
+                    </button>
+                    <button onclick="filterRooms('other-facilities')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Studio Room
+                    </button>
+                </div>
+            </details>
+
+            <details class="mb-3">
+                <summary class="w-full px-4 py-2 rounded-full bg-white text-gray-800 hover:bg-gray-100 font-semibold cursor-pointer transition">
+                    Our Programs
+                </summary>
+                <div class="mt-2 ml-4 space-y-2">
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Edufenture
+                    </button>
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Museum Adventure
+                    </button>
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Family Treasure Hunt
+                    </button>
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Night at the Museum
+                    </button>
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Couple Date Museum
+                    </button>
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Museum Camping Experience
+                    </button>
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Escape Room
+                    </button>
+                    <button onclick="filterRooms('programs')" class="block w-full text-left px-3 py-1 rounded-md bg-white hover:bg-gray-100 text-gray-700 text-sm">
+                        Energy Heroes Program
+                    </button>
+                </div>
+            </details>
+
+            <div class="mt-auto flex items-center space-x-2 text-sm text-white/80 pt-4 border-t border-white/20">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" class="w-5 h-5">
+                <a href="https://wa.me/6281234567890" target="_blank" class="hover:underline hover:text-white">
+                    Contact Us via WhatsApp
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 px-6 py-10">
+        <h1 class="text-3xl font-bold mb-6 text-center">🖼️ Eksplorasi Ruangan Museum</h1>
+        <p class="mt-2 mb-7 text-white text-center">
+            Temukan berbagai Penawaran Menarik Dari Kami.
+        </p>
+        <hr class="border-t border-white/30 mb-8">
+
+        <div id="roomGallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+    </main>
+</div>
+
+<script>
+    // Data dummy untuk ruangan museum
+    const roomData = [
+        {
+            name: "Rumah Energi Baru",
+            category: "hotel",
+            description: "Pengalaman menginap yang unik dengan fokus pada keberlanjutan energi.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Penginapan Energi",
+            category: "hotel",
+            description: "Akomodasi nyaman dengan konsep desain hemat energi.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Penginapan Listrik",
+            category: "hotel",
+            description: "Nikmati kenyamanan modern dengan sentuhan tema kelistrikan.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ruang kWh",
+            category: "meeting-room",
+            description: "Ruang rapat modern dilengkapi dengan fasilitas presentasi lengkap.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ruang Tesla",
+            category: "meeting-room",
+            description: "Inspirasi inovasi dalam suasana ruang rapat yang dinamis.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ruang Ohm",
+            category: "meeting-room",
+            description: "Sempurna untuk brainstorming dengan lingkungan yang tenang dan kondusif.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ruang Inspiring",
+            category: "meeting-room",
+            description: "Ciptakan ide-ide besar di ruangan yang didesain untuk memicu kreativitas.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ruang Explore",
+            category: "meeting-room",
+            description: "Ajak tim Anda menjelajahi konsep baru di ruang yang fleksibel ini.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ruang Ampere",
+            category: "meeting-room",
+            description: "Ideal untuk pertemuan tim kecil dengan fokus dan produktivitas.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ruang Volt",
+            category: "meeting-room",
+            description: "Energi positif di setiap sudut, cocok untuk presentasi penting.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Taman Belakang",
+            category: "other-facilities",
+            description: "Area hijau luas untuk relaksasi atau acara outdoor.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Taman Tengah",
+            category: "other-facilities",
+            description: "Oase tenang di pusat museum, ideal untuk istirahat singkat.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Lapangan Olahraga",
+            category: "other-facilities",
+            description: "Fasilitas lengkap untuk berbagai aktivitas olahraga dan rekreasi.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Fasilitas Olahraga",
+            category: "other-facilities",
+            description: "Berbagai peralatan dan area untuk menjaga kebugaran Anda.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Cafe Faraday",
+            category: "other-facilities",
+            description: "Nikmati hidangan lezat dan minuman menyegarkan di kafe tematik kami.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Studio Room",
+            category: "other-facilities",
+            description: "Ruangan serbaguna untuk workshop, sesi foto, atau kegiatan kreatif lainnya.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Edufenture",
+            category: "programs",
+            description: "Petualangan edukasi interaktif yang dirancang untuk semua usia.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Museum Adventure",
+            category: "programs",
+            description: "Jelajahi setiap sudut museum dengan misi petualangan seru.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Family Treasure Hunt",
+            category: "programs",
+            description: "Kegiatan berburu harta karun yang menyenangkan untuk seluruh keluarga.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Night at the Museum",
+            category: "programs",
+            description: "Pengalaman magis menjelajahi museum di malam hari.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Couple Date Museum",
+            category: "programs",
+            description: "Kencan romantis dengan latar belakang sejarah dan inovasi.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Museum Camping Experience",
+            category: "programs",
+            description: "Berkemah di lingkungan museum, pengalaman tak terlupakan.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Escape Room",
+            category: "programs",
+            description: "Uji kecerdasan Anda dalam tantangan escape room bertema listrik.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Energy Heroes Program",
+            category: "programs",
+            description: "Program khusus untuk anak-anak menjadi pahlawan energi masa depan.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+         {
+            name: "Teater 5D",
+            category: "exhibitions",
+            description: "Pengalaman sinematik edukatif dengan teknologi visual dan efek fisik.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Galeri Penemuan Listrik",
+            category: "exhibitions",
+            description: "Telusuri sejarah penemuan listrik dari masa ke masa.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Zona Interaktif Elektronik",
+            category: "exhibitions",
+            description: "Mainkan dan pelajari konsep dasar elektronik secara langsung.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Area Pembangkitan Energi",
+            category: "exhibitions",
+            description: "Lihat model dan simulasi cara energi listrik dihasilkan.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Sejarah Telekomunikasi",
+            category: "exhibitions",
+            description: "Pameran evolusi komunikasi dari telegraf hingga internet.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Robotika dan Otomasi",
+            category: "exhibitions",
+            description: "Saksikan demonstrasi robot dan prinsip dasar otomasi.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Ilusi Optik & Cahaya",
+            category: "exhibitions",
+            description: "Eksplorasi fenomena cahaya dan ilusi yang memukau.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },
+        {
+            name: "Laboratorium Fisika",
+            category: "exhibitions",
+            description: "Ikuti eksperimen seru yang mengungkap rahasia fisika.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        },       
+        {
+            name: "Laboratorium Fisika",
+            category: "exhibitions",
+            description: "Ikuti eksperimen seru yang mengungkap rahasia fisika.",
+            image: "teater-5d.jpg",
+            detailLink: "/detailenergibaru.html"
+        }
+    ];
+
+    let currentCategory = 'all'; // Menyimpan kategori yang sedang aktif
+    let currentSearchTerm = ''; // Menyimpan istilah pencarian yang sedang aktif
+
+    function renderRooms() {
+        const gallery = document.getElementById('roomGallery');
+        gallery.innerHTML = ''; // Bersihkan galeri sebelum merender ulang
+
+        const filteredAndSearchedRooms = roomData.filter(room => {
+            const matchesCategory = currentCategory === 'all' || room.category === currentCategory;
+            const matchesSearch = room.name.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+                                  room.description.toLowerCase().includes(currentSearchTerm.toLowerCase());
+            return matchesCategory && matchesSearch;
+        });
+
+        if (filteredAndSearchedRooms.length === 0) {
+            gallery.innerHTML = '<p class="col-span-full text-center text-gray-300 text-lg">Tidak ada ruangan yang ditemukan.</p>';
+            return;
+        }
+
+        filteredAndSearchedRooms.forEach(room => {
+            const roomCard = `
+                <div class="room-card bg-white p-4 rounded-xl shadow-md hover:scale-105 transition duration-300 ease-in-out">
+                    <img src="${room.image}" alt="${room.name}" class="h-48 w-full object-cover rounded-lg mb-4" />
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">${room.name}</h3>
+                    <p class="text-gray-600 text-sm">${room.description}</p>
+                    <div class="flex gap-2 mt-4">
+                        <a href="${room.detailLink}" class="px-4 py-2 rounded-full text-white transition text-sm font-medium"
+                           style="background: linear-gradient(to right, #00AFC1, #0D5C66);">
+                            Detail
+                        </a>
+                    </div>
+                </div>
+            `;
+            gallery.insertAdjacentHTML('beforeend', roomCard);
+        });
+    }
+
+    function filterRooms(category) {
+        currentCategory = category;
+        renderRooms();
+    }
+
+    function filterRoomsAndSearch() {
+        currentSearchTerm = document.getElementById('searchInput').value;
+        renderRooms();
+    }
+
+    // Render rooms saat halaman pertama kali dimuat
+    document.addEventListener('DOMContentLoaded', renderRooms);
+</script>
+
+</body>
+</html>

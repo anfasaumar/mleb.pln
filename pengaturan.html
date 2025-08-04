@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengaturan Akun</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D5C66', // Dark Teal
+                        accent: '#00AFC1',  // Bright Cyan
+                        'neutral-bg': '#E0F2F7', // A light background for sections
+                        'text-dark': '#333333' // Darker text for readability on light backgrounds
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            /* Ensures the gradient covers the whole page, not just content height */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            padding: 20px; /* Add some padding around the main section */
+        }
+        /* Custom styling for toggle switches (optional, for a different look than default checkbox) */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #00AFC1; /* Accent color */
+        }
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px #00AFC1;
+        }
+        input:checked + .toggle-slider:before {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body style="background: linear-gradient(to right, #00AFC1, #0D5C66);" class="text-text-dark">
+
+    <section class="max-w-5xl w-full mx-auto p-6 md:p-8 bg-white/20 rounded-xl shadow-2xl">
+        <h2 class="text-4xl font-bold text-white mb-8 flex items-center gap-3">
+            <i class="fas fa-cog text-white"></i> Pengaturan Akun
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-6 border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-5 text-primary flex items-center gap-3">
+                    <i class="fas fa-user-cog"></i> Informasi Akun
+                </h3>
+                <ul class="text-base space-y-4 text-text-dark">
+                    <li>
+                        <a href="#" onclick="showForm('editName')" class="flex justify-between items-center hover:text-accent transition duration-200 ease-in-out">
+                            Ubah Nama <i class="fas fa-pen ml-2"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showForm('editEmail')" class="flex justify-between items-center hover:text-accent transition duration-200 ease-in-out">
+                            Ubah Email <i class="fas fa-envelope ml-2"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="showForm('changePassword')" class="flex justify-between items-center hover:text-accent transition duration-200 ease-in-out">
+                            Ganti Kata Sandi <i class="fas fa-lock ml-2"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-6 border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-5 text-primary flex items-center gap-3">
+                    <i class="fas fa-sliders-h"></i> Preferensi Tampilan
+                </h3>
+                <ul class="text-base space-y-4 text-text-dark">
+                    <li>
+                        <label for="darkModeToggle" class="flex justify-between items-center cursor-pointer">
+                            Mode Gelap
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="darkModeToggle" class="hidden" onchange="toggleDarkMode(this.checked)">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="languageSelect" class="flex justify-between items-center">
+                            Bahasa
+                            <select id="languageSelect" onchange="alert('Bahasa diubah ke: ' + this.value)"
+                                    class="ml-4 p-1 rounded border border-gray-300 bg-gray-50 text-sm focus:outline-none focus:ring-1 focus:ring-accent">
+                                <option value="id">Bahasa Indonesia</option>
+                                <option value="en">English</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li>
+                        <a href="#" onclick="alert('Layout telah direset!')" class="flex justify-between items-center hover:text-accent transition duration-200 ease-in-out">
+                            Reset Layout <i class="fas fa-sync-alt ml-2"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-6 border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-5 text-primary flex items-center gap-3">
+                    <i class="fas fa-bell"></i> Notifikasi
+                </h3>
+                <ul class="text-base space-y-4 text-text-dark">
+                    <li><label class="flex justify-between items-center">Newsletter <input type="checkbox" checked class="h-5 w-5 rounded form-checkbox text-accent focus:ring-accent" /></label></li>
+                    <li><label class="flex justify-between items-center">Event Terbaru <input type="checkbox" class="h-5 w-5 rounded form-checkbox text-accent focus:ring-accent" /></label></li>
+                    <li><label class="flex justify-between items-center">Promo & Diskon <input type="checkbox" class="h-5 w-5 rounded form-checkbox text-accent focus:ring-accent" /></label></li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-6 border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-5 text-primary flex items-center gap-3">
+                    <i class="fas fa-shield-alt"></i> Privasi & Keamanan
+                </h3>
+                <ul class="text-base space-y-4 text-text-dark">
+                    <li><a href="#" onclick="alert('Melihat Riwayat Login...')" class="flex justify-between items-center hover:text-accent transition duration-200 ease-in-out">Riwayat Login <i class="fas fa-history ml-2"></i></a></li>
+                    <li><a href="#" onclick="alert('Mengelola Akses...')" class="flex justify-between items-center hover:text-accent transition duration-200 ease-in-out">Kelola Akses <i class="fas fa-user-shield ml-2"></i></a></li>
+                    <li><a href="#" onclick="confirmDelete()" class="flex justify-between items-center text-red-600 hover:text-red-800 transition duration-200 ease-in-out">Hapus Akun <i class="fas fa-trash ml-2"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="editNameModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-sm">
+            <h3 class="text-xl font-bold mb-4 text-primary">Ubah Nama</h3>
+            <input type="text" id="newNameInput" class="w-full p-2 border border-gray-300 rounded mb-4 focus:ring-accent focus:border-accent" placeholder="Nama Baru" value="John Doe">
+            <div class="flex justify-end gap-2">
+                <button onclick="saveName()" class="px-4 py-2 bg-accent text-white rounded hover:bg-opacity-90 transition">Simpan</button>
+                <button onclick="closeModal('editNameModal')" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="editEmailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-sm">
+            <h3 class="text-xl font-bold mb-4 text-primary">Ubah Email</h3>
+            <input type="email" id="newEmailInput" class="w-full p-2 border border-gray-300 rounded mb-4 focus:ring-accent focus:border-accent" placeholder="Email Baru" value="john.doe@example.com">
+            <div class="flex justify-end gap-2">
+                <button onclick="saveEmail()" class="px-4 py-2 bg-accent text-white rounded hover:bg-opacity-90 transition">Simpan</button>
+                <button onclick="closeModal('editEmailModal')" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="changePasswordModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-sm">
+            <h3 class="text-xl font-bold mb-4 text-primary">Ganti Kata Sandi</h3>
+            <input type="password" id="currentPasswordInput" class="w-full p-2 border border-gray-300 rounded mb-3 focus:ring-accent focus:border-accent" placeholder="Kata Sandi Saat Ini">
+            <input type="password" id="newPasswordInput" class="w-full p-2 border border-gray-300 rounded mb-3 focus:ring-accent focus:border-accent" placeholder="Kata Sandi Baru">
+            <input type="password" id="confirmPasswordInput" class="w-full p-2 border border-gray-300 rounded mb-4 focus:ring-accent focus:border-accent" placeholder="Konfirmasi Kata Sandi Baru">
+            <div class="flex justify-end gap-2">
+                <button onclick="savePassword()" class="px-4 py-2 bg-accent text-white rounded hover:bg-opacity-90 transition">Simpan</button>
+                <button onclick="closeModal('changePasswordModal')" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show modals
+        function showForm(formType) {
+            const modalId = `${formType}Modal`;
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        // Function to close modals
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Simulate save actions
+        function saveName() {
+            const newName = document.getElementById('newNameInput').value;
+            alert(`Nama berhasil diubah menjadi: ${newName}`);
+            closeModal('editNameModal');
+        }
+
+        function saveEmail() {
+            const newEmail = document.getElementById('newEmailInput').value;
+            alert(`Email berhasil diubah menjadi: ${newEmail}`);
+            closeModal('editEmailModal');
+        }
+
+        function savePassword() {
+            const currentPassword = document.getElementById('currentPasswordInput').value;
+            const newPassword = document.getElementById('newPasswordInput').value;
+            const confirmPassword = document.getElementById('confirmPasswordInput').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('Kata sandi baru tidak cocok!');
+                return;
+            }
+            if (currentPassword === '' || newPassword === '') {
+                 alert('Semua bidang kata sandi harus diisi.');
+                 return;
+            }
+
+            alert('Kata sandi berhasil diubah!');
+            closeModal('changePasswordModal');
+            // In a real application, you'd send this data to a server for verification and update
+        }
+
+        // Simulate dark mode toggle
+        function toggleDarkMode(isChecked) {
+            if (isChecked) {
+                document.body.classList.add('dark-mode');
+                alert('Mode Gelap ON!');
+                // In a real app, apply dark mode classes to other elements or change a global theme
+            } else {
+                document.body.classList.remove('dark-mode');
+                alert('Mode Gelap OFF!');
+            }
+        }
+
+        // Simulate account deletion
+        function confirmDelete() {
+            if (confirm('Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan.')) {
+                alert('Akun Anda telah dihapus.');
+                // Redirect to a logout or confirmation page
+                // window.location.href = '/logout';
+            }
+        }
+    </script>
+
+</body>
+</html>

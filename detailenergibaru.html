@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeri Interaktif Scroll Infinity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #00AFC1, #0D5C66);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            padding: 40px 20px;
+        }
+        
+        @media screen and (min-width: 1024px) {
+            .main-content {
+                flex-direction: row;
+                height: 100vh;
+                padding: 20px;
+            }
+        }
+
+        /* Gallery Container */
+        .gallery-container {
+            width: 100%;
+            height: 70vh;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            border-radius: 1rem;
+            box-shadow: 0 0 30px rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding: 10px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .photos {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .photo.visible {
+            opacity: 1;
+            transform: translateY(0);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+            cursor: pointer;
+        }
+
+        /* Controls Button */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        @media screen and (min-width: 1024px) {
+            .controls {
+                flex-direction: column;
+                bottom: initial;
+                top: 50%;
+                left: initial;
+                right: 20px;
+                transform: translateY(-50%);
+            }
+        }
+
+        .controls button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .controls button:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Deskripsi Container */
+        .deskripsi-container {
+            width: 100%;
+            background-color: #ffffff;
+            border: 5px solid #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+        @media screen and (min-width: 1024px) {
+            .deskripsi-container {
+                width: 500px;
+            }
+        }
+
+        .deskripsi-container:hover {
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .deskripsi-container h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0e7490;
+        }
+
+        .deskripsi-container p {
+            color: rgba(0, 0, 0, 0.8);
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .deskripsi-container ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .deskripsi-container ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        @media screen and (min-width: 640px) {
+            .button-group {
+                flex-direction: row;
+            }
+        }
+
+        .button-group a {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+        }
+
+        .button-group a:first-child {
+            background-color: #0e7490;
+        }
+
+        .button-group a:last-child {
+            background-color: #035B71;
+        }
+
+        .button-group a:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* Navbar Search Form */
+        .navbar-search-form .search-input {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .navbar-search-form .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .navbar-search-form .search-input:focus {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #035B71;
+        }
+
+        /* Navbar Toggler Icon */
+        #navbar-toggler {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        #navbar-toggler span {
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+        #navbar-toggler.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        #navbar-toggler.active span:nth-child(2) {
+            opacity: 0;
+        }
+        #navbar-toggler.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Modal Styles */
+        .modal-active {
+            overflow: hidden;
+        }
+
+        #image-modal.hidden {
+            display: none;
+        }
+
+        #image-modal {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        #modal-image {
+            transform: scale(0.8);
+            animation: scaleIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <div class="bg-[#035B71] text-white py-2 shadow-md">
+        <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-globe text-white"></i>
+                <small class="text-white">museumlistrikpln.com | (+62) 812-3456-7890</small>
+            </div>
+            <div class="flex gap-4">
+                <a href="mailto:museumlistrikpln@gmail.com" class="text-white text-lg hover:text-yellow-300 transition" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-lg hover:text-yellow-300 transition" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="tel:+6281234567890" class="text-white text-lg hover:text-yellow-300 transition" aria-label="Telepon"><i class="fas fa-phone"></i></a>
+                <a href="https://instagram.com/museumlistrik" target="_blank" class="text-white text-lg hover:text-yellow-300 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@museumlistrikpln" target="_blank" class="text-white text-lg hover:text-yellow-300 transition" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@MuseumListrikPLN" target="_blank" class="text-white text-lg hover:text-yellow-300 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="sticky top-0 z-50 shadow-lg" style="background: linear-gradient(to right, rgba(0, 175, 193, 0.8), rgba(13, 92, 102, 0.8)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <a class="flex items-center gap-2 text-white font-bold text-xl">
+                <img src="MLEB-logo.png" alt="Logo Museum Listrik dan Energi Baru Terbarukan" class="w-24 h-auto">
+            </a>
+            <button class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggler">
+                <div class="w-6 h-6 flex flex-col justify-around">
+                    <span class="block h-0.5 w-full bg-white transition-all duration-300"></span>
+                    <span class="block h-0.5 w-full bg-white transition-all duration-300"></span>
+                    <span class="block h-0.5 w-full bg-white transition-all duration-300"></span>
+                </div>
+            </button>
+            <div class="hidden md:flex flex-col md:flex-row md:items-center md:flex-1 w-full md:w-auto mt-4 md:mt-0" id="navbarNav">
+                <ul class="flex flex-col md:flex-row md:ml-8 gap-3 md:gap-6 w-full md:w-auto">
+                    <li><a href="/finalindex.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Beranda</a></li>
+                    <li><a href="finalindex.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">News</a></li>
+                    <li><a href="/finalindex.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Event</a></li>
+                    <li><a href="/finalcatalog.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Katalog</a></li>
+                </ul>
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6 ml-auto mt-4 md:mt-0 w-full md:w-auto">
+                    <form class="flex w-full md:w-auto navbar-search-form" role="search">
+                        <input class="search-input py-2 px-4 rounded-full mr-2 outline-none focus:ring-2 focus:ring-white focus:border-transparent w-full md:w-48" type="search" placeholder="Cari...">
+                        <button class="bg-white text-[#0D5C66] px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition duration-200 flex-shrink-0" type="submit">Cari</button>
+                    </form>
+                    <div class="relative group">
+                        <button class="flex items-center gap-2 text-white font-medium px-3 py-2 rounded-md hover:bg-white/10 transition duration-200" type="button" aria-expanded="false" aria-haspopup="true">
+                            <i class="fas fa-user-circle text-xl"></i> Profil
+                        </button>
+                        <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 origin-top-right">
+                            <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/index.html">Dashboard</a></li>
+                            <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/pengaturan.html">Pengaturan</a></li>
+                            <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/login.html">Login</a></li>
+                            <li><hr class="border-t border-gray-200 my-1"></li>
+                            <li><a class="block px-4 py-2 text-red-600 hover:bg-gray-100" href="#">Keluar</a></li>
+                        </ul>
+                    </div>
+                    <a href="#">
+                        <img src="logo-pln-removebg-preview.png" alt="Logo PLN" class="w-20 h-auto">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-content">
+        <div class="gallery-container lg:w-1/2">
+            <div class="photos" id="photoList">
+                <div class="photo"><img src="wisma energi baru.jpg" alt="Wisma Energi Baru" /></div>
+                <div class="photo"><img src="wisma energi.jpg" alt="Wisma Energi" /></div>
+                <div class="photo"><img src="wisma listrik.jpeg" alt="Wisma Listrik" /></div>
+                <div class="photo"><img src="wisma energi baru.jpg" alt="Wisma Energi Baru" /></div>
+                <div class="photo"><img src="wisma energi.jpg" alt="Wisma Energi" /></div>
+                <div class="photo"><img src="wisma listrik.jpeg" alt="Wisma Listrik" /></div>
+            </div>
+        </div>
+
+        <div class="deskripsi-container lg:w-1/2">
+            <h3>🌟 Ruang Edukasi Energi</h3>
+            <p>Ruangan ini menampilkan evolusi teknologi listrik, interaksi interaktif untuk anak-anak dan dewasa, serta koleksi replika pembangkit dan peralatan rumah tangga dari berbagai era.</p>
+            <ul>
+                <li>Panel interaktif dan simulasi pembangkitan energi</li>
+                <li>Miniatur pembangkit listrik dari masa ke masa</li>
+                <li>Zona edukasi ramah anak</li>
+                <li>Suasana futuristik dan pencahayaan dinamis</li>
+            </ul>
+            <div class="button-group">
+                <a href="/pemesanan.html">Pesan Sekarang</a>
+                <a href="/pemesanan.html">Hubungi Kami</a>
+            </div>
+        </div>
+    </div>
+    
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100] hidden">
+        <div class="relative max-w-full max-h-full p-4">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 transition-colors duration-200">
+                <i class="fas fa-times-circle"></i>
+            </button>
+            <img id="modal-image" src="" alt="Full-size preview" class="max-w-full max-h-[85vh] rounded-xl shadow-lg">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const gallery = document.querySelector(".gallery-container");
+            const photoList = document.getElementById("photoList");
+            const photos = document.querySelectorAll(".photo");
+            const navToggler = document.getElementById("navbar-toggler");
+            const navBarNav = document.getElementById("navbarNav");
+
+            // Clone photos for seamless infinite scroll
+            if (photoList) {
+                const clonedPhotos = photoList.cloneNode(true);
+                photoList.appendChild(clonedPhotos);
+            }
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, {
+                root: gallery,
+                threshold: 0.5
+            });
+
+            photos.forEach(photo => {
+                observer.observe(photo);
+            });
+
+            // Auto-scroll functionality
+            let scrollInterval;
+            const scrollSpeed = 0.5; // Kecepatan scroll, diubah menjadi lebih kecil
+            const scrollIntervalTime = 10; // Interval waktu diperkecil menjadi 10ms
+
+            function startAutoScroll() {
+                if (!gallery) return;
+                scrollInterval = setInterval(() => {
+                    gallery.scrollBy({
+                        top: scrollSpeed,
+                        behavior: 'smooth'
+                    });
+                    // Reset to the top to create the infinite loop illusion
+                    if (gallery.scrollTop >= photoList.scrollHeight / 2) {
+                        gallery.scrollTop = 0;
+                    }
+                }, scrollIntervalTime);
+            }
+
+            function stopAutoScroll() {
+                clearInterval(scrollInterval);
+            }
+
+            // Manual scroll buttons
+            if (gallery) {
+                window.scrollUp = function() {
+                    stopAutoScroll();
+                    gallery.scrollBy({
+                        top: -(gallery.clientHeight * 0.8),
+                        behavior: 'smooth'
+                    });
+                };
+
+                window.scrollDown = function() {
+                    stopAutoScroll();
+                    gallery.scrollBy({
+                        top: gallery.clientHeight * 0.8,
+                        behavior: 'smooth'
+                    });
+                };
+
+                startAutoScroll();
+                gallery.addEventListener("mouseenter", stopAutoScroll);
+                gallery.addEventListener("mouseleave", startAutoScroll);
+            }
+
+            // Navbar Toggler for mobile responsiveness
+            navToggler.addEventListener("click", () => {
+                navBarNav.classList.toggle("hidden");
+                const togglerSpans = navToggler.querySelectorAll('span');
+                if (navBarNav.classList.contains('hidden')) {
+                    togglerSpans[0].style.transform = 'none';
+                    togglerSpans[1].style.opacity = '1';
+                    togglerSpans[2].style.transform = 'none';
+                } else {
+                    togglerSpans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    togglerSpans[1].style.opacity = '0';
+                    togglerSpans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                }
+            });
+
+            // Modal elements
+            const imageModal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const galleryImages = document.querySelectorAll('.photo img');
+
+            // Function to open the modal
+            function openModal(imageSrc) {
+                modalImage.src = imageSrc;
+                imageModal.classList.remove('hidden');
+                document.body.classList.add('modal-active');
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                imageModal.classList.add('hidden');
+                document.body.classList.remove('modal-active');
+            }
+
+            // Add click event listeners to all gallery images
+            galleryImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    openModal(img.src);
+                });
+            });
+
+            // Add event listeners to close the modal
+            closeModalBtn.addEventListener('click', closeModal);
+            imageModal.addEventListener('click', (e) => {
+                if (e.target.id === 'image-modal') {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

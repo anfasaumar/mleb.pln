@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Museum Listrik PLN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D5C66', // Dark Teal
+                        accent: '#00AFC1',  // Bright Cyan
+                        'error-red': '#EF4444', // Tailwind's red-500
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* Optional: Custom animation if you prefer something other than animate__fadeIn */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Basic styles for error text */
+        .input-error {
+            border-color: var(--tw-colors-error-red); /* Use Tailwind color variable */
+        }
+        .error-message {
+            color: var(--tw-colors-error-red);
+            font-size: 0.875rem; /* text-sm */
+            margin-top: 0.25rem; /* mt-1 */
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-primary to-accent flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md animate-fadeIn ">
+       <img src="icon robot1.png" alt="Robot Icon" class="h-40 w-25 mr-2 " />
+        <h2 class="text-3xl font-bold text-primary text-center mb-8 flex items-center justify-center gap-3"> Login Museum Listrik PLN</h2>
+
+        <form id="loginForm" class="space-y-5" onsubmit="handleLogin(event)">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <div class="relative">
+                    <input type="email" id="email" name="email" placeholder="contoh@domain.com"
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                           required />
+                    <i class="fas fa-envelope absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                    <p id="emailError" class="error-message hidden">Masukkan email yang valid.</p>
+                </div>
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi</label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" placeholder="••••••••"
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                           required />
+                    <i id="passwordToggle" class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-gray-600"
+                       onclick="togglePasswordVisibility()"></i>
+                    <p id="passwordError" class="error-message hidden">Kata sandi minimal 6 karakter.</p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                    <input type="checkbox" id="rememberMe" class="accent-primary h-4 w-4 rounded" />
+                    Ingat Saya
+                </label>
+                <a href="#" class="text-sm text-accent hover:underline font-medium">Lupa Sandi?</a>
+            </div>
+
+            <button type="submit" id="loginButton"
+                    class="w-full bg-primary hover:bg-accent text-white font-semibold py-2 rounded-lg transition duration-200 ease-in-out flex items-center justify-center gap-2"
+                    disabled> <span id="buttonText">Masuk</span>
+                <span id="loadingSpinner" class="hidden fas fa-spinner fa-spin"></span>
+            </button>
+            <p id="generalError" class="error-message text-center hidden">Terjadi kesalahan. Silakan coba lagi.</p>
+        </form>
+
+        <p class="mt-7 text-sm text-center text-gray-600">
+            Belum punya akun?
+            <a href="/daftar.html" class="text-accent font-medium hover:underline">Daftar sekarang</a>
+        </p>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const loginButton = document.getElementById('loginButton');
+        const passwordToggle = document.getElementById('passwordToggle');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const generalError = document.getElementById('generalError');
+
+        // Function to validate email format
+        function isValidEmail(email) {
+            // Simple regex for email validation
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // Function to validate form inputs
+        function validateForm() {
+            let isEmailValid = true;
+            let isPasswordValid = true;
+
+            // Email validation
+            if (emailInput.value.trim() === '' || !isValidEmail(emailInput.value.trim())) {
+                emailInput.classList.add('input-error');
+                emailError.classList.remove('hidden');
+                isEmailValid = false;
+            } else {
+                emailInput.classList.remove('input-error');
+                emailError.classList.add('hidden');
+            }
+
+            // Password validation (e.g., min length)
+            if (passwordInput.value.length < 6) {
+                passwordInput.classList.add('input-error');
+                passwordError.classList.remove('hidden');
+                isPasswordValid = false;
+            } else {
+                passwordInput.classList.remove('input-error');
+                passwordError.classList.add('hidden');
+            }
+
+            // Enable/disable login button based on validity
+            loginButton.disabled = !(isEmailValid && isPasswordValid);
+        }
+
+        // Event Listeners for real-time validation
+        emailInput.addEventListener('input', validateForm);
+        passwordInput.addEventListener('input', validateForm);
+
+        // Initial validation call (for page load with pre-filled fields, if any)
+        document.addEventListener('DOMContentLoaded', validateForm);
+
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            passwordToggle.classList.toggle('fa-eye');
+            passwordToggle.classList.toggle('fa-eye-slash');
+        }
+
+        // Handle login submission
+        async function handleLogin(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            validateForm(); // Re-validate on submit to catch any last-minute changes
+
+            if (loginButton.disabled) {
+                return; // Do not proceed if form is invalid
+            }
+
+            // Show loading state
+            loginButton.disabled = true;
+            buttonText.textContent = 'Memuat...';
+            loadingSpinner.classList.remove('hidden');
+            generalError.classList.add('hidden'); // Hide previous general errors
+
+            try {
+                // Simulate API call
+                const response = await new Promise(resolve => setTimeout(() => {
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+
+                    // Dummy login logic:
+                    if (email === 'user@example.com' && password === 'password123') {
+                        resolve({ success: true, message: 'Login berhasil!' });
+                    } else if (email === 'error@example.com') {
+                        resolve({ success: false, message: 'Email tidak terdaftar.' });
+                    }
+                    else {
+                        resolve({ success: false, message: 'Email atau kata sandi salah.' });
+                    }
+                }, 1500)); // Simulate 1.5 second network delay
+
+                if (response.success) {
+                    alert(response.message + '\nSelamat datang!'); // Success message
+                    // Redirect to dashboard or home page
+                    // window.location.href = '/dashboard.html';
+                } else {
+                    generalError.textContent = response.message;
+                    generalError.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                generalError.textContent = 'Terjadi kesalahan jaringan. Silakan coba lagi.';
+                generalError.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                loginButton.disabled = false;
+                buttonText.textContent = 'Masuk';
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+    </script>
+
+</body>
+</html>

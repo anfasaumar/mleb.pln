@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Perusahaan Profesional Anda</title>
+    <!-- Memuat Tailwind CSS dari CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Menggunakan font Inter dari Google Fonts untuk tampilan profesional -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk ikon sosial media dan lainnya -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Latar belakang sangat lembut, hampir putih */
+            color: #1a202c; /* Warna teks gelap yang lebih kontras */
+            line-height: 1.8; /* Meningkatkan jarak antar baris untuk keterbacaan */
+            scroll-behavior: smooth; /* Scroll halus untuk navigasi */
+          .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .navbar-search-form .search-input {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+        }
+        .navbar-search-form .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Hero Carousel specific styles */
+        .hero-carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 1; /* Below the overlay and content */
+        }
+        }
+        /* Animasi fade-in untuk elemen */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+        .fade-in-delay-5 { transition-delay: 0.5s; }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- top navbar section -->
+<div class="bg-[#035B71] text-white py-2 shadow-md">
+    <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center gap-2">
+            <i class="fas fa-globe text-white"></i>
+            <small class="text-white">museumlistrikpln.com | (+62) 812-3456-7890</small>
+        </div>
+        <div class="flex gap-4">
+            <a href="mailto:museumlistrikpln@gmail.com" class="text-white text-lg hover-effect" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-lg hover-effect" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="tel:+6281234567890" class="text-white text-lg hover-effect" aria-label="Telepon"><i class="fas fa-phone"></i></a>
+            <a href="https://instagram.com/museumlistrik" target="_blank" class="text-white text-lg hover-effect" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@museumlistrikpln" target="_blank" class="text-white text-lg hover-effect" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@MuseumListrikPLN" target="_blank" class="text-white text-lg hover-effect" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<!-- main navbar section -->
+<nav class="sticky top-0 z-50 shadow-lg" style="background: linear-gradient(to right, #00AFC1, #0D5C66);">
+    <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+        <a class="flex items-center gap-2 text-white font-bold text-xl">
+            <img src="MLEB-logo.png" alt="Logo Museum Listrik dan Energi Baru Terbarukan" class="w-24 h-auto">
+        </a>
+        <button class="md:hidden border-0 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggler">
+            <span class="navbar-toggler-icon block w-6 h-6"></span>
+        </button>
+        <div class="hidden md:flex flex-col md:flex-row md:items-center md:flex-1 w-full md:w-auto mt-4 md:mt-0" id="navbarNav">
+            <ul class="flex flex-col md:flex-row md:ml-8 gap-3 md:gap-6 w-full md:w-auto">
+                <li><a href="#beranda" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Beranda</a></li>
+                <li><a href="#news" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">News</a></li>
+                <li><a href="#events" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Event</a></li>
+                <li><a href="/finalcatalog.html" class="block py-2 px-3 text-white font-medium hover:text-yellow-300 transition duration-200">Katalog</a></li>
+            </ul>
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6 ml-auto mt-4 md:mt-0 w-full md:w-auto">
+                <form class="flex w-full md:w-auto navbar-search-form" role="search">
+                    <input class="search-input py-2 px-4 rounded-full mr-2 outline-none focus:ring-2 focus:ring-white focus:border-transparent w-full md:w-48" type="search" placeholder="Cari...">
+                    <button class="bg-white text-[#0D5C66] px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition duration-200 flex-shrink-0" type="submit">Cari</button>
+                </form>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 text-white font-medium px-3 py-2 rounded-md hover:bg-white/10 transition duration-200" type="button" aria-expanded="false" aria-haspopup="true">
+                        <i class="fas fa-user-circle text-xl"></i> Profil
+                    </button>
+                    <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 origin-top-right">
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/finalindex.html">Dashboard</a></li>
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/pengaturan.html">Pengaturan</a></li>
+                        <li><a class="block px-4 py-2 text-gray-800 hover:bg-gray-100" href="/login.html">Login</a></li>
+                        <li><hr class="border-t border-gray-200 my-1"></li>
+                        <li><a class="block px-4 py-2 text-red-600 hover:bg-gray-100" href="#">Keluar</a></li>
+                    </ul>
+                </div>
+                <a class="" href="#">
+                    <img src="logo-pln-removebg-preview.png" alt="Logo PLN" class="w-20 h-auto">
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <main class="container mt-16">
+
+        <!-- Hero Section -->
+        <section class="bg-white p-12 rounded-3xl shadow-3xl mb-16 flex flex-col md:flex-row items-center justify-between gap-12 border-b-4 border-blue-600">
+            <div class="md:w-1/2 text-center md:text-left fade-in">
+                <h2 class="text-6xl md:text-7xl font-extrabold text-blue-900 leading-tight mb-6 tracking-tight">
+                    Mewujudkan Inovasi untuk <span class="text-blue-600">Masa Depan</span> yang Lebih Baik
+                </h2>
+                <p class="text-xl text-gray-700 mb-10 leading-relaxed fade-in fade-in-delay-1">
+                    Kami adalah **[Nama Perusahaan Anda]**, mitra terpercaya Anda dalam **[Sebutkan bidang/industri utama]**. Kami berkomitmen untuk memberikan solusi yang transformatif dan berkelanjutan, mendorong batas-batas kemungkinan.
+                </p>
+                <a href="#layanan" class="btn-primary fade-in fade-in-delay-2">Jelajahi Layanan Kami <i class="fas fa-arrow-right ml-3"></i></a>
+            </div>
+            <div class="md:w-1/2 flex justify-center fade-in fade-in-delay-3">
+                <img src="https://placehold.co/700x450/e0f2fe/1e3a8a?text=Inovasi+Perusahaan" alt="Gambar Inovasi Perusahaan" class="rounded-2xl shadow-2xl w-full max-w-lg border border-gray-200">
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="tentang" class="bg-white p-12 rounded-3xl shadow-2xl mb-16">
+            <h2 class="text-5xl font-extrabold text-blue-800 mb-10 text-center border-b-4 border-blue-200 pb-4">Tentang Kami</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <p class="text-lg leading-relaxed mb-6 text-gray-800">
+                        Didirikan pada tahun **[Tahun Didirikan]**, **[Nama Perusahaan Anda]** telah berkembang menjadi kekuatan terdepan di industri **[Sebutkan bidang/industri perusahaan Anda]**. Perjalanan kami dimulai dengan visi sederhana: untuk **[Sebutkan visi awal atau tujuan pendirian]**. Sejak itu, kami telah melayani berbagai klien, dari startup hingga perusahaan besar, dengan dedikasi dan keunggulan yang tak tertandingi.
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-800">
+                        Kami bangga dengan pendekatan kami yang berpusat pada klien, memastikan setiap solusi yang kami tawarkan disesuaikan sepenuhnya dengan kebutuhan unik mereka. Tim kami terdiri dari para ahli yang bersemangat, inovatif, dan selalu siap menghadapi tantangan baru dengan integritas dan profesionalisme. Kami percaya bahwa kolaborasi, pembelajaran berkelanjutan, dan komitmen terhadap keunggulan adalah kunci untuk mencapai hasil yang luar biasa dan berkelanjutan.
+                    </p>
+                </div>
+                <div class="flex justify-center fade-in fade-in-delay-1">
+                    <img src="https://placehold.co/600x400/bfdbfe/1e3a8a?text=Kantor+Kami" alt="Kantor Perusahaan" class="rounded-2xl shadow-xl w-full max-w-md border border-gray-200">
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Vision Section -->
+        <section id="visi-misi" class="bg-blue-50 p-12 rounded-3xl shadow-2xl mb-16">
+            <h2 class="text-5xl font-extrabold text-blue-800 mb-10 text-center border-b-4 border-blue-200 pb-4">Visi & Misi</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white p-10 rounded-2xl shadow-lg border-t-8 border-blue-600 fade-in">
+                    <h3 class="text-3xl font-bold text-blue-700 mb-5 flex items-center"><i class="fas fa-eye mr-4 text-blue-500 text-4xl"></i>Visi Kami</h3>
+                    <p class="text-lg leading-relaxed text-gray-800">
+                        Menjadi pelopor global dalam **[Industri Anda]**, diakui atas inovasi disruptif, keunggulan operasional, dan dampak positif yang kami berikan kepada masyarakat dan lingkungan. Kami bercita-cita untuk membentuk masa depan di mana **[Sebutkan aspirasi besar perusahaan yang ambisius]**.
+                    </p>
+                </div>
+                <div class="bg-white p-10 rounded-2xl shadow-lg border-t-8 border-blue-600 fade-in fade-in-delay-1">
+                    <h3 class="text-3xl font-bold text-blue-700 mb-5 flex items-center"><i class="fas fa-bullseye mr-4 text-blue-500 text-4xl"></i>Misi Kami</h3>
+                    <ul class="list-none text-lg leading-relaxed space-y-4 text-gray-800">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-4 mt-1 text-xl"></i>Memberikan solusi terdepan yang didukung oleh penelitian dan pengembangan berkelanjutan, berfokus pada kebutuhan klien.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-4 mt-1 text-xl"></i>Membangun kemitraan strategis yang kuat dan saling menguntungkan dengan klien dan pemangku kepentingan, mendorong pertumbuhan bersama.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-4 mt-1 text-xl"></i>Mendorong budaya keunggulan, integritas, dan tanggung jawab sosial di setiap aspek operasi kami, menjamin praktik bisnis yang etis.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-4 mt-1 text-xl"></i>Memberdayakan karyawan kami untuk mencapai potensi penuh mereka melalui lingkungan kerja yang suportif, inklusif, dan inspiratif.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services/Products Section -->
+        <section id="layanan" class="bg-white p-12 rounded-3xl shadow-2xl mb-16">
+            <h2 class="text-5xl font-extrabold text-blue-800 mb-10 text-center border-b-4 border-blue-200 pb-4">Layanan Unggulan Kami</h2>
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Layanan 1 -->
+                <div class="bg-gradient-to-br from-blue-100 to-white p-10 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in">
+                    <div class="text-6xl text-blue-600 mb-5 text-center"><i class="fas fa-cogs"></i></div>
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 text-center">Pengembangan Solusi Kustom</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">Kami merancang dan mengembangkan solusi perangkat lunak yang disesuaikan sepenuhnya untuk memenuhi kebutuhan bisnis unik Anda, memastikan efisiensi dan skalabilitas maksimal.</p>
+                </div>
+                <!-- Layanan 2 -->
+                <div class="bg-gradient-to-br from-blue-100 to-white p-10 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-1">
+                    <div class="text-6xl text-blue-600 mb-5 text-center"><i class="fas fa-cloud"></i></div>
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 text-center">Layanan Cloud & Infrastruktur</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">Optimalkan operasi Anda dengan layanan cloud kami yang aman dan andal, termasuk migrasi, manajemen, dan optimisasi infrastruktur cloud untuk kinerja superior.</p>
+                </div>
+                <!-- Layanan 3 -->
+                <div class="bg-gradient-to-br from-blue-100 to-white p-10 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-2">
+                    <div class="text-6xl text-blue-600 mb-5 text-center"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 text-center">Keamanan Siber Tingkat Lanjut</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">Lindungi aset digital Anda dengan solusi keamanan siber komprehensif kami, mulai dari penilaian kerentanan hingga respons insiden dan kepatuhan regulasi.</p>
+                </div>
+                <!-- Layanan 4 -->
+                <div class="bg-gradient-to-br from-blue-100 to-white p-10 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-3">
+                    <div class="text-6xl text-blue-600 mb-5 text-center"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 text-center">Analisis Data & Kecerdasan Buatan</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">Manfaatkan kekuatan data Anda dengan layanan analisis data dan kecerdasan buatan kami untuk wawasan yang lebih dalam dan keputusan bisnis yang lebih cerdas.</p>
+                </div>
+                <!-- Layanan 5 -->
+                <div class="bg-gradient-to-br from-blue-100 to-white p-10 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-4">
+                    <div class="text-6xl text-blue-600 mb-5 text-center"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 text-center">Pengembangan Aplikasi Mobile</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">Ciptakan pengalaman pengguna yang luar biasa dengan aplikasi mobile yang intuitif dan berkinerja tinggi untuk platform iOS dan Android.</p>
+                </div>
+                <!-- Layanan 6 -->
+                <div class="bg-gradient-to-br from-blue-100 to-white p-10 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-5">
+                    <div class="text-6xl text-blue-600 mb-5 text-center"><i class="fas fa-users-cog"></i></div>
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 text-center">Konsultasi & Strategi IT</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">Dapatkan panduan ahli dari tim konsultan IT kami untuk strategi teknologi, perencanaan proyek, dan optimisasi sistem yang efektif.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us / Our Values Section -->
+        <section id="nilai" class="bg-blue-700 text-white p-12 rounded-3xl shadow-2xl mb-16">
+            <h2 class="text-5xl font-extrabold mb-10 text-center border-b-4 border-blue-400 pb-4">Nilai Inti Kami</h2>
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="flex items-start p-8 bg-blue-800 rounded-2xl shadow-lg fade-in">
+                    <div class="text-6xl text-blue-300 mr-6"><i class="fas fa-lightbulb"></i></div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3">Inovasi Berkelanjutan</h3>
+                        <p class="text-blue-100 leading-relaxed">Kami selalu mencari cara baru dan lebih baik untuk memecahkan masalah, mendorong batas teknologi dan menciptakan nilai baru.</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-8 bg-blue-800 rounded-2xl shadow-lg fade-in fade-in-delay-1">
+                    <div class="text-6xl text-blue-300 mr-6"><i class="fas fa-handshake"></i></div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3">Kemitraan yang Kokoh</h3>
+                        <p class="text-blue-100 leading-relaxed">Kami membangun hubungan jangka panjang dengan klien dan mitra, berdasarkan kepercayaan, transparansi, dan saling pengertian yang mendalam.</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-8 bg-blue-800 rounded-2xl shadow-lg fade-in fade-in-delay-2">
+                    <div class="text-6xl text-blue-300 mr-6"><i class="fas fa-award"></i></div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3">Keunggulan Tanpa Kompromi</h3>
+                        <p class="text-blue-100 leading-relaxed">Setiap proyek dikerjakan dengan standar kualitas tertinggi, memastikan hasil yang optimal, memuaskan, dan melampaui ekspektasi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="tim" class="bg-white p-12 rounded-3xl shadow-2xl mb-16">
+            <h2 class="text-5xl font-extrabold text-blue-800 mb-10 text-center border-b-4 border-blue-200 pb-4">Tim Penggerak Kami</h2>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 text-center">
+                <!-- Anggota Tim 1 -->
+                <div class="flex flex-col items-center p-8 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in">
+                    <img src="https://placehold.co/200x200/a78bfa/ffffff?text=CEO" alt="Budi Santoso" class="rounded-full w-44 h-44 object-cover mb-6 border-4 border-blue-300 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700">Budi Santoso</h3>
+                    <p class="text-gray-600 mb-4 text-lg">Chief Executive Officer</p>
+                    <div class="flex space-x-4 text-blue-600">
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-linkedin text-3xl"></i></a>
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-twitter-square text-3xl"></i></a>
+                    </div>
+                </div>
+                <!-- Anggota Tim 2 -->
+                <div class="flex flex-col items-center p-8 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-1">
+                    <img src="https://placehold.co/200x200/a78bfa/ffffff?text=CTO" alt="Siti Rahayu" class="rounded-full w-44 h-44 object-cover mb-6 border-4 border-blue-300 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700">Siti Rahayu</h3>
+                    <p class="text-gray-600 mb-4 text-lg">Chief Technology Officer</p>
+                    <div class="flex space-x-4 text-blue-600">
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-linkedin text-3xl"></i></a>
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-github-square text-3xl"></i></a>
+                    </div>
+                </div>
+                <!-- Anggota Tim 3 -->
+                <div class="flex flex-col items-center p-8 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-2">
+                    <img src="https://placehold.co/200x200/a78bfa/ffffff?text=CMO" alt="Dewi Lestari" class="rounded-full w-44 h-44 object-cover mb-6 border-4 border-blue-300 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700">Dewi Lestari</h3>
+                    <p class="text-gray-600 mb-4 text-lg">Chief Marketing Officer</p>
+                    <div class="flex space-x-4 text-blue-600">
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-linkedin text-3xl"></i></a>
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-instagram-square text-3xl"></i></a>
+                    </div>
+                </div>
+                <!-- Anggota Tim 4 -->
+                <div class="flex flex-col items-center p-8 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 border border-blue-100 fade-in fade-in-delay-3">
+                    <img src="https://placehold.co/200x200/a78bfa/ffffff?text=COO" alt="Joko Susilo" class="rounded-full w-44 h-44 object-cover mb-6 border-4 border-blue-300 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700">Joko Susilo</h3>
+                    <p class="text-gray-600 mb-4 text-lg">Chief Operating Officer</p>
+                    <div class="flex space-x-4 text-blue-600">
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-linkedin text-3xl"></i></a>
+                        <a href="#" class="hover:text-blue-800 transition duration-300"><i class="fab fa-facebook-square text-3xl"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mleb Partners Section -->
+      <section id="partners" class="py-10 text-white" style="background: white">
+  <div class="container mx-auto px-6 text-center mb-12">
+    <div class="animate__animated animate__fadeInUp">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+
+    <!-- MLEB Partners -->
+    <div>
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-extrabold text-purple-500 flex justify-center items-center gap-2">
+        <i class="fas fa-handshake text-purple-500"></i> MLEB Partners
+      </h2>
+      <p class="text-purple-500 mt-2">Kami berkolaborasi dengan berbagai institusi dan organisasi terpercaya.</p>
+      <hr class="border-t-2 border-black w-100 mx-auto mt-4">
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+
+
+        <!-- Partner Card -->
+        <div class="bg-transparent p-100 w-100 rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="TMII.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="dinas-pendidikan.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="JTA.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="jumpstart-logo.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+       <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="igtki.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="paramita-jaya.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="PUTRI.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="HC.png" alt="TMII" 
+       class="h-14 p-25 mx-auto object-contain transition duration-300">
+</div>
+         <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+  <img src="aice.png" alt="TMII" 
+       class="h-12 mx-auto object-contain transition duration-300">
+</div>
+      </div>
+    </div>
+
+    
+    <!-- Our Certifications -->
+   <div>
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-extrabold text-purple-500 flex justify-center items-center gap-2">
+        <i class="fas fa-certificate text-purple-500"></i> Our Certifications
+      </h2>
+      <p class="text-purple-500 mt-2">Pengakuan resmi atas standar dan kualitas layanan kami.</p>
+      <hr class="border-t-2 border-black w-100 mx-auto mt-4">
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+
+        <!-- Certification Card -->
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5 ">
+          <img src="14001-2005.png" alt="ISO 14001:2005" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="9004.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="logo-smk3.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="pmi.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="konsultan-iso-37001.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="Konsultan-ISO-37001-2016-Sistem-Manajemen-Anti-Penyuapan.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="museum-awards.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="ISO-14001-Tahun-2015.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="ISO-9001-2015.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+        <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="CHSE.png" alt="ISO 9004" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+         <div class="bg-transparent rounded-lg shadow-md p-2 max-w-[140px] 
+     hover:shadow-xl transition duration-300 hover:shadow-indigo-500/70 
+     hover:ring-2 hover:ring-indigo-300 hover:scale-105 hover:-translate-y-5">
+          <img src="dirjen-k3.png" alt="ISO 14001:2005" class="h-12 mx-auto object-contain transition duration-300">
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+        <!-- Contact Section -->
+        <section id="kontak" class="bg-white p-12 rounded-3xl shadow-2xl mb-16">
+            <h2 class="text-5xl font-extrabold text-blue-800 mb-10 text-center border-b-4 border-blue-200 pb-4">Hubungi Kami</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <p class="text-lg leading-relaxed mb-8 text-gray-800">
+                        Kami sangat antusias untuk mendengar dari Anda! Apakah Anda memiliki pertanyaan, ingin mendiskusikan potensi proyek, atau hanya ingin menjalin koneksi, tim profesional kami siap membantu. Jangan ragu untuk menghubungi kami melalui detail di bawah ini atau mengisi formulir kontak yang tersedia.
+                    </p>
+                    <ul class="space-y-5 text-lg text-gray-800">
+                        <li class="flex items-center"><i class="fas fa-envelope text-blue-600 mr-5 text-3xl"></i><strong>Email:</strong> <a href="mailto:info@perusahaananda.com" class="text-blue-600 hover:underline font-medium">info@perusahaananda.com</a></li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt text-blue-600 mr-5 text-3xl"></i><strong>Telepon:</strong> +62 21 1234 5678</li>
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt text-blue-600 mr-5 text-3xl mt-1"></i><strong>Alamat:</strong> Jl. Inovasi Digital No. 45, Kawasan Bisnis Strategis, Kota Anda, Kode Pos 12345, Indonesia</li>
+                    </ul>
+                    <div class="mt-10">
+                        <h3 class="text-3xl font-bold text-blue-700 mb-5">Temukan Kami di Peta</h3>
+                        <!-- Google Maps Placeholder (ganti dengan embed map asli Anda) -->
+                        <div class="rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.398902513926!2d106.8291583147693!3d-6.208763995505035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f430b2e8f1f1%3A0x7e5f3f0e0f0e0f0e!2sMonumen%20Nasional!5e0!3m2!1sen!2sid!4v1678888888888!5m2!1sen!2sid"
+                                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in fade-in-delay-1">
+                    <h3 class="text-3xl font-bold text-blue-700 mb-5">Kirim Pesan kepada Kami</h3>
+                    <form class="space-y-6 bg-blue-50 p-10 rounded-2xl shadow-xl border border-blue-100">
+                        <div>
+                            <label for="contact-nama" class="block text-lg font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                            <input type="text" id="contact-nama" name="nama" class="mt-1 block w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base" placeholder="Nama Lengkap Anda">
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-lg font-medium text-gray-700 mb-2">Alamat Email</label>
+                            <input type="email" id="contact-email" name="email" class="mt-1 block w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base" placeholder="email@contoh.com">
+                        </div>
+                        <div>
+                            <label for="contact-subjek" class="block text-lg font-medium text-gray-700 mb-2">Subjek</label>
+                            <input type="text" id="contact-subjek" name="subjek" class="mt-1 block w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base" placeholder="Subjek pesan Anda">
+                        </div>
+                        <div>
+                            <label for="contact-pesan" class="block text-lg font-medium text-gray-700 mb-2">Pesan Anda</label>
+                            <textarea id="contact-pesan" name="pesan" rows="7" class="mt-1 block w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base" placeholder="Tulis pesan Anda di sini..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full btn-primary">Kirim Pesan <i class="fas fa-paper-plane ml-3"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        
+
+    </main>
+
+   <footer class="bg-gradient-to-r from-[#00AFC1] to-[#0D5C66] text-white py-12" style="background: linear-gradient(to right, #00AFC1, #0D5C66);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 text-center md:text-left">
+
+    <!-- Logo & Deskripsi -->
+    <div>
+      <img src="MLEB-logo.png" alt="Logo Nama Perusahaan">
+      <h2 class="text-xl font-bold mb-3">Museum Listrik dan Energi Baru</h2>
+      <p class="text-sm text-gray-200">
+        Solusi teknologi masa depan. Kami menyediakan layanan digital terintegrasi untuk membangun masa depan yang cerdas.
+      </p>
+    </div>
+
+    <!-- Kontak -->
+<div>
+  <h3 class="text-lg font-semibold mb-3">📞 Kontak</h3>
+  <p class="text-sm text-gray-300">Jl. Teknologi No.88, Jakarta</p>
+  <p class="text-sm text-gray-300">info@namaperusahaan.id</p>
+  
+  <!-- Contact Us via WhatsApp -->
+  <div class="mt-4 flex items-center space-x-2 text-sm text-white pt-4 border-t border-white/20">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" class="w-5 h-5">
+    <a href="https://wa.me/6281234567890" target="_blank" class="text-white hover:underline hover:text-white-50 transition">
+    M-Assist
+    </a>
+  </div>
+</div>
+
+
+    <!-- Lokasi & Google Maps -->
+    <div>
+      <h3 class="text-lg font-semibold mb-3">🗺️ Lokasi Kantor</h3>
+      <div class="rounded-lg shadow-lg overflow-hidden">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126916.98354236377!2d106.689431!3d-6.229728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f03a2dc4c179%3A0xfed6e56d99e4c109!2sJakarta!5e0!3m2!1sid!2sid!4v1600000000000!5m2!1sid!2sid"
+          width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Media Sosial -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">📱 Ikuti Kami</h3>
+      <div class="flex flex-col items-center md:items-start space-y-3 text-white text-base">
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-blue-500 transition">
+          <i class="fab fa-facebook-square text-xl"></i>
+          <span>Facebook</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-pink-500 transition">
+          <i class="fab fa-instagram text-xl"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-sky-400 transition">
+          <i class="fab fa-twitter text-xl"></i>
+          <span>Twitter</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-red-600 transition">
+          <i class="fab fa-youtube text-xl"></i>
+          <span>YouTube</span>
+        </a>
+        <a href="#" class="text-white flex items-center space-x-2 hover:text-black transition">
+      <i class="fab fa-tiktok text-xl"></i>
+      <span>TikTok</span>
+    </a>
+     <a href="mailto:info@namaperusahaan.id" class="text-white flex items-center space-x-2 hover:text-yellow-400 transition">
+      <i class="fas fa-envelope text-xl"></i>
+      <span>Email</span>
+    </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="mt-10 border-t border-white/30 pt-4 text-center text-sm text-gray-300">
+    &copy; 2025 Nama Perusahaan. Semua Hak Dilindungi.
+  </div>
+</footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Kembali ke Atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript untuk interaktivitas -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Profil perusahaan berhasil dimuat dan ditingkatkan untuk tampilan profesional!');
+
+            // Fungsi untuk scroll halus ke bagian tertentu
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 90, // Sesuaikan offset untuk header yang lebih besar
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Fungsi untuk scroll ke atas halaman
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Tampilkan/Sembunyikan tombol "Kembali ke Atas"
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.onscroll = function() {
+                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            };
+
+            // Event listener untuk tombol "Kembali ke Atas"
+            scrollToTopBtn.addEventListener('click', scrollToTop);
+
+            // Animasi fade-in saat elemen masuk ke viewport
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observerOptions = {
+                root: null, // Menggunakan viewport sebagai root
+                rootMargin: '0px',
+                threshold: 0.1 // Ketika 10% elemen terlihat
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target); // Berhenti mengamati setelah muncul
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Contoh sederhana untuk formulir kontak (tanpa pengiriman ke backend)
+            const contactForm = document.querySelector('#kontak form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Mencegah pengiriman formulir default
+
+                    const nama = document.getElementById('contact-nama').value;
+                    const email = document.getElementById('contact-email').value;
+                    const pesan = document.getElementById('contact-pesan').value;
+
+                    if (nama && email && pesan) {
+                        // Di lingkungan produksi, Anda akan mengirim data ini ke server
+                        // Sebagai gantinya, kita akan menampilkan pesan sukses sederhana
+                        alert('Pesan Anda telah terkirim! Kami akan segera menghubungi Anda.'); // Gunakan modal kustom di produksi
+                        contactForm.reset(); // Reset formulir setelah simulasi pengiriman
+                    } else {
+                        alert('Harap lengkapi semua kolom formulir untuk mengirim pesan.'); // Gunakan modal kustom di produksi
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
